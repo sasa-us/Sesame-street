@@ -1,0 +1,142 @@
+html{
+  
+    width: 100vw;
+    height: 100vh;
+    
+  }  
+  /* make backgroundpic match all screen   */
+  @font-face {
+    font-family: myFirstFont;
+    src: url(images/bg.svg);
+  }
+  body {
+    font-family: myFirstFont;
+    background: url(images/bg1.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    text-shadow: 5px 5px 10px black;
+  
+  }
+  
+  
+    header{
+      /* background-color: yellow; */
+      height: 10%;
+    }
+  
+    main{
+      /* background-color: pink; */
+      width: 100%;
+      height: 80%;
+      position: relative;
+    }
+  
+    .cardArea{
+      width: 65%;
+      height: 100%;
+      position: relative;
+      top: 90px;
+      left: 50px;
+     
+      /* background-color: rgb(177, 223, 177); */
+    }
+    .cardContainer{
+      height: 25%;
+      width: 16.6%;
+      /* background-color: lightblue; */
+      float: left;
+    }
+    .card{
+      /* background-color: rgb(150, 48, 150); */
+      height: 90%;
+      width: 80%;
+      position: relative;
+      left: 10%;
+      top: 5%;
+    }
+    
+    .image {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+    .image img,
+    .coveringSide img {
+          
+      width: 100%;
+      
+      border-radius: 50%;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .coveringSide {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+  
+    .coveringSide img {
+      height: 100%;
+      width: 100%;
+    }
+    
+    .card.reveal .coveringSide img{
+      display: none;
+    }
+      
+  
+    div.stats{
+      position: absolute;
+      right: 25px;
+      top: 85px;
+      
+      height: 80%;
+      width: max-content;
+      font-size: 28px;
+     
+      /* background-color: white; */
+    }
+  .value {
+    border-style: outset;
+    /* border-color */
+    border-radius: 5px;
+  }
+    .label,
+    .value {
+      margin: 8px 0;
+    }
+    header,
+  buttom#reset {
+    font-family: myFirstFont;
+    font-size: 28px;
+  }
+  
+    #modelShadow {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,.5);
+      display: none;
+      z-index: 10;
+    }
+  
+    #modelBody {
+      position: fixed;
+      left: 72%;
+      top: 80%;
+      width:50%;
+      min-width: 50%;
+      min-height: 50%;
+      background-image: url(images/cry.gif);
+      background-repeat: no-repeat;
+      transform: translate(-50%, -50%);
+  
+    }
+  

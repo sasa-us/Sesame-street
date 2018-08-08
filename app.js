@@ -105,7 +105,6 @@ function createRandonCard() {
           <div class='image'>
              <img class='pic' src="images/Abby.png" alt="Abby"> 
           </div>
-
           <div class='coveringSide'>
             <img src="images/card-back.jpg" alt="back">
           </div>

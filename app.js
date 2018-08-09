@@ -2,9 +2,15 @@ $(document).ready(initializeApp);
 
 function initializeApp() {
     createRandonCard();
-    $('.cardArea').on('click', '.card', card_clicked);
+    eventHandler();
+    // $('.cardArea').on('click', '.card', card_clicked);
 }//end initializApp
-
+function eventHandler() {
+    $('.cardArea').on('click', '.card', card_clicked);
+    $('#modal-overlay').on('click', closeWelcomeModal); 
+    $('#reset').on("click", reset);
+        //     reset(); 
+}
 var imgElement;
 var imgsrcFirst;
 var imgsrcSecond;
@@ -17,27 +23,24 @@ var match_counter = 0;
 
 var matches = 0;
 var attempts = 0;
+var remains = 4;
 var accuracy = 0;
 var games_played = 0;
 
 var statsArea = $('.stats');
 var games_playedValue = $('.games-played .value');
-var attemptsValue = $('.attempts .value');
+//var attemptsValue = $('.attempts .value');
+var remainsValue = $('.remains .value');
 var accuracyValue = $('.accuracy .value');
-//audio should define outside document.ready
-//1 to make it gloable
-// = getElementById inside document.ready
-// if no definition inside .ready. it will find audio 
-//before DOM load.
+
 var audio = document.getElementById("myAudio");
 
 var resetButton = $('#reset');
-resetButton.on("click", function () {
-    reset();
-});
+// resetButton.on("click", function () {
+//     reset();
+// });
 
 function reset() {
-    // games_played++;
     reset_stats();
     $('.reveal').removeClass('reveal');
 }//end reset()
@@ -46,6 +49,7 @@ function reset_stats() {
     matches = 0;
     attempts = 0;
     accuracy = 0;
+    remains = 4
     match_counter = 0;
     //total_possible_matches = 2;
     display_stats();
@@ -58,23 +62,25 @@ function display_stats() {
     games_playedValue.empty();
     games_playedValue.text(games_played);
 
-    attemptsValue.empty();
-    attemptsValue.text(attempts);
+    // attemptsValue.empty();
+    // attemptsValue.text(attempts);
+
+    remainsValue.empty();
+    remainsValue.text(remains);
 
     accuracyValue.empty(); 
     // console.log('type of accuracy ', typeof(accuracy));-> number
     //accuracy = (((accuracy) * 100).toFixed(2)).toString()  + "%";
-    accuracy = Math.round((accuracy) * 100)  ;
-    accuracyValue.text(accuracy+ "%");
+    accuracyValue.text(Math.round((accuracy) * 100)+ "%");
     
     console.log("in display func matches, attempts, accuracy", matches, attempts, accuracy);
 }//end display
 
 //==============  createRandonCard --------------------
 function createRandonCard() {
-    var cardSrcArr = ["images/elmo.jpg", "images/Abby.png", "images/bert.png", 
-                      "images/bigBird.png", "images/Cookie.png", "images/Count.png", 
-                      "images/Ernie.png", "images/Oscar.png", "images/Prairie.png"
+    var cardSrcArr = ["assets/images/elmo.jpg", "assets/images/Abby.png", "assets/images/bert.png", 
+                      "assets/images/bigBird.png", "assets/images/Cookie.png", "assets/images/Count.png", 
+                      "assets/images/Ernie.png", "assets/images/Oscar.png", "assets/images/Prairie.png"
                     ];
 
     //copy array so original arr won't be changed  concat make double of original card
@@ -125,20 +131,19 @@ function createNewCard(picture) {
 
     var back = $("<div>").addClass('coveringSide');
     card.append(back);
-    var backImage = $("<img>").attr('src', 'images/card-back.jpg').attr('alt', 'back');
+    var backImage = $("<img>").attr('src', 'assets/images/card-back.jpg').attr('alt', 'back');
     back.append(backImage);
     return container;
 }//end creatNewCard
-//------------------------createRandonCard end
-//later on if use jQuery this. don't need to use $() to wrap. otherwise it need to use [0] to select the element itselfß
+
 function card_clicked() {
-    console.log('in car_clicked');
     // true - assign first_card_clicked equal to the html DOM Element that was clicked, return
    var clickedCard = $(this); 
    if(clickedCard.hasClass('reveal')) {
         return;
     }
     
+    //click 1st card
     if (first_card_clicked === null) {
         first_card_clicked = clickedCard;
         console.log('first card click ? ', first_card_clicked);
@@ -146,17 +151,18 @@ function card_clicked() {
         imgsrcFirst = imgElement.attr('src');
         //change cardback to  front =================================
         first_card_clicked.addClass('reveal');
-        //===========================================================
-        console.log('first card image src ', imgsrcFirst);
         return;
     }
     //when use this without $() jQuery wraper. use else if (second_card_clicked == null) {
+    
+    //click 2nd card. and compare immediately
     else {
         if(first_card_clicked === clickedCard){
             return;
         }
         second_card_clicked = clickedCard;
         attempts++;
+        remains--;
         games_played++;
 
         console.log(('attempts'), attempts);
@@ -166,7 +172,6 @@ function card_clicked() {
 
         second_card_clicked.addClass('reveal');
         console.log('second card image src ', imgsrcSecond);
-
 
         //=======================compare two card src
         // 1. match
@@ -180,7 +185,6 @@ function card_clicked() {
             first_card_clicked = null;
             second_card_clicked = null;
             display_stats();
-            console.log("both card null ", first_card_clicked, second_card_clicked);
 
             //check if match_counter is equivalent to total_possible_matches=2
             if (match_counter == total_possible_matches) {
@@ -205,7 +209,6 @@ function card_clicked() {
 
             return;
         }
-        display_stats();
     }
 }//end card_clicked
 
@@ -221,21 +224,32 @@ function flipback() {
     second_card_clicked.removeClass('reveal');
     first_card_clicked = null;
     second_card_clicked = null;
-    console.log('in flipback func card set null', first_card_clicked, second_card_clicked);
     display_stats(); 
     //user has 4 times to play 
-    if (attempts == 4) {
+    //if (attempts == 4) {
+    if (remains == 0) {
         //unclick all card
         $('.cardArea').off("click");
         
         //use model to show the result
-        popUp();
+        popUploseModal();
+        $('.cardArea').on('click', alertModal);
     }
 }//flipback()
 
-function popUp() {
+function popUploseModal() {
     $('#modelShadow').css('display', 'block');
     setTimeout(function() {
         $('#modelShadow').css('display', 'none');
     } ,4000);
 }// end popUp()
+ 
+function alertModal() {
+    alert('time out, please click reset to play');
+}
+function closeWelcomeModal() {
+    console.log('x clicked');
+    $("#modal").toggleClass("closed");
+    $("#modal-overlay").toggleClass("closed");
+
+}

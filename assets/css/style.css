@@ -1,236 +1,311 @@
-html{
-  
-    width: 100vw;
-    height: 100vh;
-    
-  }  
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  /* make backgroundpic match all screen   */
+html {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Lucida Sans", sans-serif;
+}
 
-  body {
-    font-family: myFirstFont;
-    background: url("../images/bg1.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    width: 100vw;
-    height: 100vh;
-    margin: 0 auto;
-    text-shadow: 5px 5px 10px black;
-  
-  }
-  
-  
-    header{
-      /* background-color: yellow; */
-      height: 10%;
-    }
-  
-    main{
-      /* background-color: pink; */
-      width: 100%;
-      height: 80%;
-      position: relative;
-    }
-  
-    .cardArea{
-      width: 65%;
-      height: 100%;
-      position: relative;
-      top: 90px;
-      left: 50px;
-     
-      /* background-color: rgb(177, 223, 177); */
-    }
-    .cardContainer{
-      height: 25%;
-      width: 16.6%;
-      /* background-color: lightblue; */
-      float: left;
-      cursor: pointer;
-      
-    }
-    .cardContainer:hover {
-      transform: scale(1.1); 
-  }
-   
-    .card{
-      /* background-color: rgb(150, 48, 150); */
-      height: 90%;
-      width: 80%;
-      position: relative;
-      left: 10%;
-      top: 5%;
-    }
-     .container:hover .card  {
-      opacity: 0.3;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-     
-    }
-    .image {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      
-    } 
-    .coveringSide {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-    }
+/* make backgroundpic match all screen   */
 
-    
-    .image img,
-    .coveringSide img {    
-      width: 100%;
-      border-radius: 50%;
-      position: relative;
-      top: 50%;
-      transition: transform .2s; 
-      transform: translateY(-50%);
-    }
-    
-   
+body {
+  background: url("../images/bg1.1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  text-shadow: 2px 3px 9px grey;
+
+}
+
+header {
+  /* background-color: yellow; */
+  height: 10%;
+}
+
+main {
+  /* background-color: pink; */
+  width: 100%;
+  height: 80%;
+  position: relative;
+}
+
+/* -------------------status ---------------------- */
+
+div.stats {
+  display: inline-block;
+    position: absolute;
+    left: 81px;
+    top: 85px;
+    height: 10%;
+    width: max-content;
+    font-size: 22px;
+}
+
+div.games-played,
+div.remains,
+div.accuracy,
+div.timeout,
+#reset {
+  display: inline-block;
+  margin: 15px;
+}
+
+.stats span{
+  padding: 0 15px;
+  margin: 0 10px;
+}
+div.timeout img,
+div#time {
+  width: 50px;
   
-    .coveringSide img {
-      height: 100%;
-      width: 100%;
-    }
-    
-    .card.reveal .coveringSide img{
-      display: none;
-    }
-      
-  
-    div.stats{
-      position: absolute;
-      right: 25px;
-      top: 85px;
-      
-      height: 80%;
-      width: max-content;
-      font-size: 28px;
-     
-      /* background-color: white; */
-    }
-  .value {
-    border-style: outset;
-    /* border-color */
-    border-radius: 5px;
-  }
-    .label,
-    .value {
-      margin: 8px 0;
-    }
-    header,
-  buttom#reset {
-    font-family: myFirstFont;
-    font-size: 28px;
-  }
-  
-    #modelShadow {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0,0,0,.5);
-      display: none;
-      z-index: 10;
-    }
-  
-    #modelBody {
-      position: fixed;
-      left: 72%;
-      top: 80%;
-      width:50%;
-      min-width: 50%;
-      min-height: 50%;
-      background-image: url("../images/cry.gif");
-      background-repeat: no-repeat;
-      transform: translate(-50%, -50%);
-  
-    }
-  
-    .modal {
-      /* This way it could be display flex or grid or whatever also. */
-      display: block;
-      
-      /* Probably need media queries here */
-      width: 600px;
-      max-width: 100%;
-      
-      height: 700px;
-      max-height: 100%;
-      
-      position: fixed;
-      
-      z-index: 100;
-      
-      left: 50%;
-      top: 50%;
-      
-      /* Use this for centering if unknown width/height */
-      transform: translate(-50%, -50%);
-      
-      /* If known, negative margins are probably better (less chance of blurry text). */
-      /* margin: -200px 0 0 -200px; */
-      
-      background: white;
-      box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
-    }
-    .closed {
-      display: none;
-    }
-    
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 50;
-      background: rgba(0, 0, 0, 0.6);
-    }
-    .modal-guts {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      /* padding: 20px 50px 20px 20px; */
-    }
-    
-.modal-guts img{
+  display: inline-block;
+}
+
+.value {
+  border-style: outset;
+  border-radius: 5px;
+}
+
+.label,
+.value {
+  margin: 8px 0;
+}
+
+header,
+buttom#reset {
+  font-size: 28px;
+}
+
+/* -----------------card=----------------------------  */
+
+.cardArea {
+  width: 65%;
+  height: 100%;
+  position: absolute;
+  top: 164px;
+  left: 84px;
+}
+
+.cardContainer {
+  height: 25%;
+  width: 16.6%;
+  /* background-color: lightblue; */
+  float: left;
+  cursor: pointer;
+}
+
+.cardContainer:hover {
+  transform: scale(1.1);
+}
+
+.card {
+  background-color: transparent;
+  border: 0;
+  height: 90%;
+  width: 80%;
+  position: relative;
+  left: 10%;
+  top: 5%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.container:hover .card {
+  opacity: 0.3;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.coveringSide {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.image img,
+.coveringSide img {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  position: relative;
+  top: 50%;
+  transition: transform .2s;
+  transform: translateY(-50%);
+}
+
+.coveringSide img {
+  /* height: 100%;
+      width: 100%; */
+}
+
+.card.reveal .coveringSide img {
+  display: none;
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+img:hover {
+  webkit-filter: blur(4px);
+  /* Chrome, Safari, Opera */
+  filter: drop-shadow(8px 8px 10px gray)
+}
+
+/* -------------- introduction --------------------- */
+div.intro {
+  width: 30%;
+  height: 100%;
+  position: absolute;
+  top: 164px;
+  right: 10px;
+}
+.intro p {
+  margin: 10px;
+}
+
+/*  ------------------welcom--modal -----------------*/
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background-color: rgba(245, 241, 241, 0.36);
+}
+
+.modal {
+  display: block;
+  width: 500px;
+  max-width: 100%;
+  height: 700px;
+  max-height: 100%;
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+  /* Use this for centering if unknown width/height */
+  transform: translate(-50%, -50%);
+  /* background: white; */
+  /* box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9); */
+}
+
+.closed {
+  display: none;
+}
+
+.modal-guts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /* padding: 20px 50px 20px 20px; */
+}
+
+.start-btn {
+  position: absolute;
+  bottom: 154px;
+  width: 39%;
+  right: 138px;
+}
+
+.modal-guts img {
   width: 100%;
   height: 100%;
   margin: 0 auto;
 }
+
 .modal-guts h3,
 .modal-guts p {
   text-align: center;
 }
-.modal .close-button {
-  position: absolute;
-  
-  /* don't need to go crazy with z-index here, just sits over .modal-guts */
-  z-index: 1;
-  
-  top: 10px;
-  
-  /* needs to look OK with or without scrollbar */
-  right: 20px;
-  
-  border: 0;
-  background: black;
-  color: white;
-  padding: 5px 10px;
-  font-size: 1.3rem;
+
+/* -------------lose modal ------------ */
+
+#modelShadow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+  display: none;
+  z-index: 10;
 }
 
-    
-    
+#modelBody {
+  position: fixed;
+  left: 72%;
+  top: 80%;
+  width: 50%;
+  min-width: 50%;
+  min-height: 50%;
+  background-image: url("../images/cry.gif");
+  background-repeat: no-repeat;
+  transform: translate(-50%, -50%);
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+/* ----------For mobile phones: -------------*/
+
+@media screen and (max-width: 400px) {
+  .cardContainer {
+    height: 17%;
+    width: 26.6%;
+    /* background-color: lightblue; */
+    float: left;
+    cursor: pointer;
+  }
+  .coveringSide {
+    height: 97%;
+    width: 90%;
+    position: absolute;
+  }
+  .card .image {
+    height: 100%;
+    width: 88%;
+    position: absolute;
+  }
+  div.stats {
+    width: max-content;
+    height: 25%;
+    color: red;
+    font-size: 20px;
+    position: relative;
+    bottom: 10px;
+  }
+  div.games-played,
+  div.remains,
+  div.accuracy,
+  #reset {
+    height: 20%;
+  }
+  .cardArea {
+    width: 99%;
+    height: 74%;
+    position: relative;
+    top: 75px;
+    left: 1px;
+  }
+}

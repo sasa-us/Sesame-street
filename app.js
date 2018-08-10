@@ -7,7 +7,7 @@ function initializeApp() {
 }//end initializApp
 function eventHandler() {
     $('.cardArea').on('click', '.card', card_clicked);
-    $('#modal-overlay').on('click', closeWelcomeModal); 
+    $('.start-btn').on('click', closeWelcomeModal); 
     $('#reset').on("click", reset);
         //     reset(); 
 }
@@ -123,15 +123,15 @@ function createNewCard(picture) {
     var card = $("<div>").addClass('card');
     container.append(card);
 
-    var image = $("<div>").addClass('image');
+    var image = $("<div>").addClass('card-face image');
     card.append(image);
 
     var imageElement = $("<img>").addClass('pic').attr('src', picture);
     image.append(imageElement);
 
-    var back = $("<div>").addClass('coveringSide');
+    var back = $("<div>").addClass('card-face coveringSide');
     card.append(back);
-    var backImage = $("<img>").attr('src', 'assets/images/card-back.jpg').attr('alt', 'back');
+    var backImage = $("<img>").attr('src', 'assets/images/card-back.png').attr('alt', 'back');
     back.append(backImage);
     return container;
 }//end creatNewCard
@@ -150,7 +150,7 @@ function card_clicked() {
         imgElement = clickedCard.find('.image img');
         imgsrcFirst = imgElement.attr('src');
         //change cardback to  front =================================
-        first_card_clicked.addClass('reveal');
+        first_card_clicked.addClass('reveal is-flipped');
         return;
     }
     //when use this without $() jQuery wraper. use else if (second_card_clicked == null) {
@@ -170,7 +170,7 @@ function card_clicked() {
         imgElement = clickedCard.find('.image img');
         imgsrcSecond = imgElement.attr('src');
 
-        second_card_clicked.addClass('reveal');
+        second_card_clicked.addClass('reveal is-flipped');
         console.log('second card image src ', imgsrcSecond);
 
         //=======================compare two card src
@@ -220,8 +220,8 @@ function flipback() {
     console.log('matchs ', matches);
     console.log('accuracy', accuracy);
 
-    first_card_clicked.removeClass('reveal');
-    second_card_clicked.removeClass('reveal');
+    first_card_clicked.removeClass('reveal is-flipped');
+    second_card_clicked.removeClass('reveal is-flipped');
     first_card_clicked = null;
     second_card_clicked = null;
     display_stats(); 
@@ -248,8 +248,83 @@ function alertModal() {
     alert('time out, please click reset to play');
 }
 function closeWelcomeModal() {
-    console.log('x clicked');
     $("#modal").toggleClass("closed");
     $("#modal-overlay").toggleClass("closed");
-
+    startGo();
 }
+
+function startGo() {
+    var countDownInterval;
+var countDownNumber;
+	function startCountDown(){
+		countDownNumber = 4;
+		$('#cards').html('<div class="countdown">3</div>');
+		$('.countdown').animate({
+			fontSize:120,
+			marginTop:102,
+			opacity:0
+		});
+		countDownInterval = setInterval(countDown, 750);
+
+		//reset clicks
+		clicks = 0;
+		//populate timer
+		// var minutes = Math.floor(time / 60);
+		// var seconds = (time-1) - minutes * 60;
+		// if(seconds < 10)$('#time').html(minutes+':0'+seconds);
+		// else $('#time').html(minutes+':'+seconds);
+	}
+
+function countDown(){
+		countDownNumber--;
+		console.log(countDownNumber);
+
+		if(countDownNumber>1) {
+            $('#cards').html('<div class="countdown">'+(countDownNumber-1)+'</div>');
+        }
+		else if(countDownNumber == 1){
+            debugger;
+            $('#cards').html('<div class="countdown">GO</div>');
+
+        }
+		$('.countdown').animate({
+			fontSize:120,
+			marginTop:102,
+			opacity:0
+		});
+		if(countDownNumber == 0){
+			clearInterval(countDownInterval);
+			//startGame();
+		}
+    }
+}
+
+//-----runing clock
+var timeoutHandle;
+function countdown(minutes) {
+    var seconds = 60;
+    var mins = minutes
+    function tick() {
+        var counter = document.getElementById("timer");
+        //var counter = $("#timer");
+        var current_minutes = mins-1
+        seconds--;
+        
+        counter.innerHTML =
+        current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+        if( seconds > 0 ) {
+            timeoutHandle=setTimeout(tick, 1000);
+        } else {
+
+            if(mins > 1){
+
+               // countdown(mins-1);   never reach “00″ issue solved:Contributed by Victor Streithorst
+               setTimeout(function () { countdown(mins - 1); }, 1000);
+
+            }
+        }
+    }
+    tick();
+}
+
+countdown(5);

@@ -2,14 +2,15 @@ $(document).ready(initializeApp);
 
 function initializeApp() {
     createRandonCard();
+
     eventHandler();
     // $('.cardArea').on('click', '.card', card_clicked);
-}//end initializApp
+} //end initializApp
 function eventHandler() {
     $('.cardArea').on('click', '.card', card_clicked);
-    $('.start-btn').on('click', closeWelcomeModal); 
+    $('.start-btn').on('click', closeWelcomeModal);
     $('#reset').on("click", reset);
-        //     reset(); 
+    //     reset(); 
 }
 var imgElement;
 var imgsrcFirst;
@@ -36,14 +37,13 @@ var accuracyValue = $('.accuracy .value');
 var audio = document.getElementById("myAudio");
 
 var resetButton = $('#reset');
-// resetButton.on("click", function () {
-//     reset();
-// });
 
 function reset() {
+    stopTimer();
+    startTimer();
     reset_stats();
     $('.reveal').removeClass('reveal');
-}//end reset()
+} //end reset()
 
 function reset_stats() {
     matches = 0;
@@ -54,34 +54,27 @@ function reset_stats() {
     //total_possible_matches = 2;
     display_stats();
     $('.cardArea').on('click', '.card', card_clicked);
-}//end reset_stats()
+} //end reset_stats()
 
 function display_stats() {
     console.log("in display func matches, attempts, accuracy", matches, attempts, accuracy);
-   
+
     games_playedValue.empty();
     games_playedValue.text(games_played);
-
-    // attemptsValue.empty();
-    // attemptsValue.text(attempts);
-
+    
     remainsValue.empty();
     remainsValue.text(remains);
 
-    accuracyValue.empty(); 
-    // console.log('type of accuracy ', typeof(accuracy));-> number
-    //accuracy = (((accuracy) * 100).toFixed(2)).toString()  + "%";
-    accuracyValue.text(Math.round((accuracy) * 100)+ "%");
-    
-    console.log("in display func matches, attempts, accuracy", matches, attempts, accuracy);
-}//end display
+    accuracyValue.empty();
+    accuracyValue.text(Math.round((accuracy) * 100) + "%");
+} //end display
 
 //==============  createRandonCard --------------------
 function createRandonCard() {
-    var cardSrcArr = ["assets/images/elmo.jpg", "assets/images/Abby.png", "assets/images/bert.png", 
-                      "assets/images/bigBird.png", "assets/images/Cookie.png", "assets/images/Count.png", 
-                      "assets/images/Ernie.png", "assets/images/Oscar.png", "assets/images/Prairie.png"
-                    ];
+    var cardSrcArr = ["assets/images/elmo.jpg", "assets/images/Abby.png", "assets/images/bert.png",
+        "assets/images/bigBird.png", "assets/images/Cookie.png", "assets/images/Count.png",
+        "assets/images/Ernie.png", "assets/images/Oscar.png", "assets/images/Prairie.png"
+    ];
 
     //copy array so original arr won't be changed  concat make double of original card
     var copy = cardSrcArr.slice().concat(cardSrcArr);
@@ -104,7 +97,7 @@ function createRandonCard() {
         //append element to page
         $(".cardArea").append(container);
     }
-}//end createRandonCard
+} //end createRandonCard
 /*
       <div class="cardContainer">
         <div class="card">
@@ -134,15 +127,17 @@ function createNewCard(picture) {
     var backImage = $("<img>").attr('src', 'assets/images/card-back.png').attr('alt', 'back');
     back.append(backImage);
     return container;
-}//end creatNewCard
+} //end creatNewCard
 
 function card_clicked() {
     // true - assign first_card_clicked equal to the html DOM Element that was clicked, return
-   var clickedCard = $(this); 
-   if(clickedCard.hasClass('reveal')) {
+    var clickedCard = $(this);
+    if (clickedCard.hasClass('reveal')) {
+        debugger;
+        shakecard();
         return;
     }
-    
+
     //click 1st card
     if (first_card_clicked === null) {
         first_card_clicked = clickedCard;
@@ -154,10 +149,11 @@ function card_clicked() {
         return;
     }
     //when use this without $() jQuery wraper. use else if (second_card_clicked == null) {
-    
+
     //click 2nd card. and compare immediately
     else {
-        if(first_card_clicked === clickedCard){
+        if (first_card_clicked === clickedCard) {
+            shakecard();
             return;
         }
         second_card_clicked = clickedCard;
@@ -191,7 +187,7 @@ function card_clicked() {
                 console.log("win");
                 audio.play();
                 //disable all card when win
-               $('.cardArea').off("click");
+                $('.cardArea').off("click");
                 console.log('in card_clicked attemps: ', attempts);
                 console.log('card_clicked matches ', matches);
             } else {
@@ -210,7 +206,11 @@ function card_clicked() {
             return;
         }
     }
-}//end card_clicked
+} //end card_clicked
+
+function shakecard() {
+    first_card_clicked.addClass('shakeme');
+}
 
 function flipback() {
     console.log('in flipback func');
@@ -224,107 +224,122 @@ function flipback() {
     second_card_clicked.removeClass('reveal is-flipped');
     first_card_clicked = null;
     second_card_clicked = null;
-    display_stats(); 
+    display_stats();
     //user has 4 times to play 
     //if (attempts == 4) {
     if (remains == 0) {
         //unclick all card
         $('.cardArea').off("click");
-        
+
         //use model to show the result
         popUploseModal();
         $('.cardArea').on('click', alertModal);
     }
-}//flipback()
+} //flipback()
 
 function popUploseModal() {
     $('#modelShadow').css('display', 'block');
-    setTimeout(function() {
+    setTimeout(function () {
         $('#modelShadow').css('display', 'none');
-    } ,4000);
-}// end popUp()
- 
+    }, 4000);
+} // end popUp()
+
 function alertModal() {
     alert('time out, please click reset to play');
 }
+
+
+
+
 function closeWelcomeModal() {
     $("#modal").toggleClass("closed");
     $("#modal-overlay").toggleClass("closed");
+    createGoModal();
+}
+
+function createGoModal() {
+    $('#go-modelShadow').css('display', 'block');
     startGo();
 }
+var countDownInterval;
+var countDownNumber;
 
 function startGo() {
-    var countDownInterval;
-var countDownNumber;
-	function startCountDown(){
-		countDownNumber = 4;
-		$('#cards').html('<div class="countdown">3</div>');
-		$('.countdown').animate({
-			fontSize:120,
-			marginTop:102,
-			opacity:0
-		});
-		countDownInterval = setInterval(countDown, 750);
+    countDownNumber = 4;
+    $('#go-modelBody').html('<div class="countdown">3</div>');
+    $('.countdown').animate({
+        fontSize: 120,
+        marginTop: 102,
+        opacity: 0
+    });
+    countDownInterval = setInterval(countDown, 750);
 
-		//reset clicks
-		clicks = 0;
-		//populate timer
-		// var minutes = Math.floor(time / 60);
-		// var seconds = (time-1) - minutes * 60;
-		// if(seconds < 10)$('#time').html(minutes+':0'+seconds);
-		// else $('#time').html(minutes+':'+seconds);
-	}
+    //populate timer
+    var minutes = Math.floor(time / 60);
+    var seconds = (time-1) - minutes * 60;
+    if(seconds < 10)$('#time').html(minutes+':0'+seconds);
+    else $('#time').html(minutes+':'+seconds);
+}
 
-function countDown(){
-		countDownNumber--;
-		console.log(countDownNumber);
+function countDown() {
+    countDownNumber--;
+    console.log(countDownNumber);
 
-		if(countDownNumber>1) {
-            $('#cards').html('<div class="countdown">'+(countDownNumber-1)+'</div>');
-        }
-		else if(countDownNumber == 1){
-            debugger;
-            $('#cards').html('<div class="countdown">GO</div>');
-
-        }
-		$('.countdown').animate({
-			fontSize:120,
-			marginTop:102,
-			opacity:0
-		});
-		if(countDownNumber == 0){
-			clearInterval(countDownInterval);
-			//startGame();
-		}
+    if (countDownNumber > 1) {
+        $('#go-modelBody').html('<div class="countdown">' + (countDownNumber - 1) + '</div>');
+    } else if (countDownNumber == 1) {
+        $('#go-modelBody').html('<div class="countdown">GO</div>');
+    }
+    $('.countdown').animate({
+        fontSize: 120,
+        marginTop: 102,
+        opacity: 0
+    });
+    if (countDownNumber == 0) {
+        $('#go-modelShadow').css('display', 'none');
+        clearInterval(countDownInterval);
+        //startGame();
+        // createRandonCard();
+        startTimer(); 
     }
 }
 
-//-----runing clock
-var timeoutHandle;
-function countdown(minutes) {
-    var seconds = 60;
-    var mins = minutes
-    function tick() {
-        var counter = document.getElementById("timer");
-        //var counter = $("#timer");
-        var current_minutes = mins-1
-        seconds--;
-        
-        counter.innerHTML =
-        current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-        if( seconds > 0 ) {
-            timeoutHandle=setTimeout(tick, 1000);
-        } else {
+function startTimer() {
+    changeClock();
+    timer();
+	counter = setInterval(timer, 1000);
+}
+var time = 301; //miao
 
-            if(mins > 1){
-
-               // countdown(mins-1);   never reach “00″ issue solved:Contributed by Victor Streithorst
-               setTimeout(function () { countdown(mins - 1); }, 1000);
-
-            }
-        }
+function timer(){   
+    time--;
+    if (time <= 0)
+    {
+        $('#timer').html('0:00');
+        stopTimer();
+        return;
     }
-    tick();
+    var minutes = Math.floor(time / 60);
+    var seconds = time - minutes * 60;
+    if(seconds < 10) {
+        $('#timer').html(minutes+':0'+seconds);
+    }
+    else {
+        $('#timer').html(minutes+':'+seconds);
+    }
 }
 
-countdown(5);
+function changeClock() {
+    $('#clock').attr('src', 'assets/images/Clock.gif');
+}
+
+function stopTimer() {
+    alert('stop timer');
+    debugger;
+    $('#clock').attr('src', 'assets/images/stopclock.jpg');
+	clearInterval(counter);
+}
+
+
+
+

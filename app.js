@@ -2,16 +2,16 @@ $(document).ready(initializeApp);
 
 function initializeApp() {
     createRandonCard();
-
     eventHandler();
-    // $('.cardArea').on('click', '.card', card_clicked);
 } //end initializApp
 function eventHandler() {
     $('.cardArea').on('click', '.card', card_clicked);
     $('.start-btn').on('click', closeWelcomeModal);
     $('#reset').on("click", reset);
-    //     reset(); 
+    $('#togglePauseClock').on("click", togglePauseClock);
 }
+
+
 var imgElement;
 var imgsrcFirst;
 var imgsrcSecond;
@@ -30,44 +30,13 @@ var games_played = 0;
 
 var statsArea = $('.stats');
 var games_playedValue = $('.games-played .value');
-//var attemptsValue = $('.attempts .value');
+
 var remainsValue = $('.remains .value');
 var accuracyValue = $('.accuracy .value');
 
 var audio = document.getElementById("myAudio");
 
 var resetButton = $('#reset');
-
-function reset() {
-    stopTimer();
-    startTimer();
-    reset_stats();
-    $('.reveal').removeClass('reveal');
-} //end reset()
-
-function reset_stats() {
-    matches = 0;
-    attempts = 0;
-    accuracy = 0;
-    remains = 4
-    match_counter = 0;
-    //total_possible_matches = 2;
-    display_stats();
-    $('.cardArea').on('click', '.card', card_clicked);
-} //end reset_stats()
-
-function display_stats() {
-    console.log("in display func matches, attempts, accuracy", matches, attempts, accuracy);
-
-    games_playedValue.empty();
-    games_playedValue.text(games_played);
-    
-    remainsValue.empty();
-    remainsValue.text(remains);
-
-    accuracyValue.empty();
-    accuracyValue.text(Math.round((accuracy) * 100) + "%");
-} //end display
 
 //==============  createRandonCard --------------------
 function createRandonCard() {
@@ -133,7 +102,7 @@ function card_clicked() {
     // true - assign first_card_clicked equal to the html DOM Element that was clicked, return
     var clickedCard = $(this);
     if (clickedCard.hasClass('reveal')) {
-        // debugger;
+        // debugger;    ????????????????????????????????????????????????
         shakecard();
         return;
     }
@@ -231,7 +200,7 @@ function flipback() {
     second_card_clicked = null;
     display_stats();
     //user has 4 times to play 
-    //if (attempts == 4) {
+
     if (remains == 0) {
         //unclick all card
         $('.cardArea').off("click");
@@ -242,6 +211,8 @@ function flipback() {
     }
 } //flipback()
 
+
+//----------------------below are Modal ----------------------------->
 function popUploseModal() {
     $('#modelShadow').css('display', 'block');
     setTimeout(function () {
@@ -251,6 +222,7 @@ function popUploseModal() {
 
 function alertModal() {
     alert('time out, please click reset to play');
+    //need a modal here
 }
 
 
@@ -266,6 +238,7 @@ function createGoModal() {
     $('#go-modelShadow').css('display', 'block');
     startGo();
 }
+
 var countDownInterval;
 var countDownNumber;
 
@@ -281,9 +254,9 @@ function startGo() {
 
     //populate timer
     var minutes = Math.floor(time / 60);
-    var seconds = (time-1) - minutes * 60;
-    if(seconds < 10)$('#time').html(minutes+':0'+seconds);
-    else $('#time').html(minutes+':'+seconds);
+    var seconds = (time - 1) - minutes * 60;
+    if (seconds < 10) $('#time').html(minutes + ':0' + seconds);
+    else $('#time').html(minutes + ':' + seconds);
 }
 
 function countDown() {
@@ -303,48 +276,122 @@ function countDown() {
     if (countDownNumber == 0) {
         $('#go-modelShadow').css('display', 'none');
         clearInterval(countDownInterval);
-        //startGame();
-        // createRandonCard();
-        startTimer(); 
+
+        togglePauseClock();
     }
 }
 
-function startTimer() {
-    changeClock();
-    timer();
-	counter = setInterval(timer, 1000);
-}
-var time = 301; //miao
 
-function timer(){   
+//-------------------------------below Timer --------------------------------------->
+function togglePauseClock() {
+    changeClock();
+    changeTimer();
+}
+// 0 is runing --> after click should be stop
+//click pause -> flag change to 1
+var clockflag = 0;
+var timerflag = 0;
+console.log('unclick pasue, clockflag is ', clockflag);
+
+function changeClock() {
+    console.log('clockflag is ', clockflag)
+    if (clockflag == 1) {
+        $('.cardArea').off("click");
+        $('#clock').attr('src', 'assets/images/stopclock.jpg');
+        $('#togglePauseClock').text('Start');
+        clockflag = 0;
+    } else if (clockflag == 0) {
+        $('.cardArea').on('click', '.card', card_clicked);
+        $('#clock').attr('src', 'assets/images/Clock.gif');
+
+        $('#togglePauseClock').text('Pause');
+        clockflag = 1;
+    }
+}
+
+function changeTimer() {
+    console.log('timer flag is ', timerflag);
+    if (timerflag == 1) {
+        stopTimer();
+        timerflag = 0;
+    } else if (timerflag == 0) {
+        startTimer();
+        timerflag = 1;
+    }
+}
+var counter = null;
+
+function stopTimer() {
+    // stop the time
+    clearInterval(counter);
+}
+
+function startTimer() {
+    // changeClock();
+    timer();
+    counter = setInterval(timer, 1000);
+}
+
+
+var time = 61; //miao
+function timer() {
     time--;
-    if (time <= 0)
-    {
+    if (time <= 0) {
         $('#timer').html('0:00');
         stopTimer();
         return;
     }
+
     var minutes = Math.floor(time / 60);
     var seconds = time - minutes * 60;
-    if(seconds < 10) {
-        $('#timer').html(minutes+':0'+seconds);
-    }
-    else {
-        $('#timer').html(minutes+':'+seconds);
+    if (seconds < 10) {
+        $('#timer').html(minutes + ':0' + seconds);
+    } else {
+        $('#timer').html(minutes + ':' + seconds);
     }
 }
 
-function changeClock() {
-    $('#clock').attr('src', 'assets/images/Clock.gif');
+function reset() {
+    reset_stats();
+    $('.is-flipped').removeClass('is-flipped');
+} //end reset()
+
+function reset_stats() {
+    initialTimer();
+    initialResult();
+    display_stats();
+} //end reset_stats()
+function initialResult() {
+
+    matches = 0;
+    attempts = 0;
+    accuracy = 0;
+    remains = 4
+    match_counter = 0;
 }
 
-function stopTimer() {
-    alert('stop timer');
-    debugger;
+function initialTimer() {
+    $('#timer').html('1:00');
+    time = 61;
+    clockflag = 0;
+    timerflag = 0;
+    stopTimer();
+
+    console.log('after reset time flag is ', timerflag);
+    $('.cardArea').off("click");
     $('#clock').attr('src', 'assets/images/stopclock.jpg');
-	clearInterval(counter);
+    $('#togglePauseClock').text('Start');
 }
 
+function display_stats() {
+    console.log("in display func matches, attempts, accuracy", matches, attempts, accuracy);
 
+    games_playedValue.empty();
+    games_playedValue.text(games_played);
 
+    remainsValue.empty();
+    remainsValue.text(remains);
 
+    accuracyValue.empty();
+    accuracyValue.text(Math.round((accuracy) * 100) + "%");
+} //end display

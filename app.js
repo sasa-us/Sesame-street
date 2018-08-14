@@ -133,7 +133,7 @@ function card_clicked() {
     // true - assign first_card_clicked equal to the html DOM Element that was clicked, return
     var clickedCard = $(this);
     if (clickedCard.hasClass('reveal')) {
-        debugger;
+        // debugger;
         shakecard();
         return;
     }
@@ -199,6 +199,9 @@ function card_clicked() {
 
         // 2 two card not match
         else if (first_card_clicked !== second_card_clicked) {
+            //make cards not clickable. either remove the click handler or
+            //put some property class on it make it unclick
+            $('.cardArea').off("click");
             setTimeout(flipback, 1000);
             // Be wary of waiting programmatically but not being able to control the user from clicking on cards while the program waits execute the reset of the code
             // Show card back on both elements that are flipped over
@@ -213,6 +216,8 @@ function shakecard() {
 }
 
 function flipback() {
+    //put back ability to click cards
+    $('.cardArea').on('click', '.card', card_clicked);
     console.log('in flipback func');
     console.log('at the end attemps: ', attempts);
     console.log('at the end matches ', matches);

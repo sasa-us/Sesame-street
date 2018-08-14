@@ -114,23 +114,22 @@ buttom#reset {
   top: 5%;
   transition: transform 1s;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .container:hover .card {
   opacity: 0.3;
 }
 
-.image {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-
+.image,
 .coveringSide {
   height: 100%;
   width: 100%;
   position: absolute;
+  /* transition: transform 1s;
+  backface-visibility:hidden; */
 }
+
 
 .image img,
 .coveringSide img {
@@ -139,23 +138,37 @@ buttom#reset {
   border-radius: 50%;
   position: relative;
   top: 50%;
-  transition: transform .2s;
+  /* transition: transform .2s; */
   transform: translateY(-50%);
+  /* below two line make it stay at original place after flip */
+  display: block;
+  margin: auto;
 }
 
-.coveringSide img {
-  /* height: 100%;
-      width: 100%; */
-}
+/* new added-------------- */
 
-.card.reveal .coveringSide img {
-  display: none;
+.card .image {
+  transform: rotateY(180deg); 
+  transform: translateZ(-1px);
 }
 
 .card.is-flipped {
   transform: rotateY(180deg);
 }
 
+.card .coveringSide{
+  transform: translateZ(1px);
+}
+/* ------------------------ */
+/* original one */
+/* .card.reveal .coveringSide img {
+  display: none;
+} */
+
+/* .card.is-flipped {
+  transform: rotateY(180deg);
+} */
+/* ---------------------------- */
 img:hover {
   webkit-filter: blur(4px);
   /* Chrome, Safari, Opera */

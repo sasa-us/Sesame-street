@@ -40,8 +40,8 @@ main {
 div.stats {
   display: inline-block;
     position: absolute;
-    left: 81px;
-    top: 85px;
+    left: 35px;
+    top: 55px;
     height: 10%;
     width: max-content;
     font-size: 22px;
@@ -53,19 +53,21 @@ div.accuracy,
 div.timeout,
 #reset {
   display: inline-block;
-  margin: 15px;
+  margin: 10px;
 }
 
 .stats span{
-  padding: 0 15px;
-  margin: 0 10px;
+  /* padding: 0 15px; */
+  margin: 0 2px;
 }
 div.timeout img,
-div#time {
+div#timer {
   width: 50px;
-  
+  margin: auto;
   display: inline-block;
 }
+
+
 
 .value {
   border-style: outset;
@@ -198,13 +200,13 @@ img:hover {
 /* -------------- introduction --------------------- */
 div.intro {
   width: 30%;
-  height: 100%;
+  height: 60%;
   position: absolute;
-  top: 164px;
-  right: 10px;
+  top: 186px;
+  right: 7px;
 }
 .intro p {
-  margin: 10px;
+  /* margin: 10px; */
 }
 
 /*  ------------------welcom--modal -----------------*/
@@ -327,6 +329,125 @@ div.intro {
 
 .col-9 {
   width: 75%;
+}
+
+/* ------------ for ipad -------------------- */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    main {
+      /* background-color: pink; */
+      width: 100%;
+      height: 52%;
+      position: relative;
+  }
+  div.accuracy, 
+  div.timeout, 
+  #reset {
+    display: inline-block;
+    margin: 2px 26px;
+}
+ 
+  div.stats {
+    display: inline-block;
+    position: absolute;
+    /* left: -50px; */
+    top: 60px;
+    height: 17%;
+    width: max-content;
+    font-size: 20px;
+}
+
+div.timeout {
+  float: right;
+}
+div.games-played, 
+div.remains, 
+div.accuracy, 
+div.timeout, 
+#reset {
+  display: inline-block;
+  margin: 1px 23px;
+}
+
+
+#reset,
+#togglePauseClock {
+    position: relative;
+    left: 210px;
+    font-size: 15px;
+}
+
+.cardArea {
+  width: 74%;
+  height: 89%;
+  position: absolute;
+  left: 38px;
+  /* bottom: -12px; */
+  top: 148px;
+  margin-top: 0px;
+}
+.cardContainer {
+  height: 25%;
+  width: 25.6%;
+
+  /* height: 17%;
+  width: 16.6%; */
+  /* background-color: lightblue; */
+  float: left;
+  cursor: pointer;
+}
+
+.card {
+  background-color: transparent;
+  border: 0;
+  height: 100%;
+  width: 97%;
+  position: relative;
+  left: 10%;
+  top: 5%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+.image img, .coveringSide img {
+  width: 60%;
+  height: 69%;
+  border-radius: 50%;
+  position: relative;
+  top: 65%;
+  /* transition: transform .2s; */
+  transform: translateY(-50%);
+  display: block;
+  margin: auto;
+}
+
+div.intro {
+  width: 38%;
+  height: 60%;
+  position: absolute;
+  top: 186px;
+  right: 38px;
+}
+.h2, h2 {
+  width: 180px;
+  font-size: 1.6rem;
+}
+
+}
+
+/* ----------for iphone 6,6S,7,8---------- */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+
+
+
+
+    
 }
 
 /* ----------For mobile phones: -------------*/

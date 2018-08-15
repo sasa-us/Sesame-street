@@ -443,52 +443,119 @@ div.intro {
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
 
+   body{
+   background: url("../images/phoneback2.1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+   }
 
-
-
-
-    
-}
-
-/* ----------For mobile phones: -------------*/
-
-@media screen and (max-width: 400px) {
-  .cardContainer {
-    height: 17%;
-    width: 26.6%;
-    /* background-color: lightblue; */
-    float: left;
-    cursor: pointer;
-  }
-  .coveringSide {
-    height: 97%;
-    width: 90%;
-    position: absolute;
-  }
-  .card .image {
-    height: 100%;
-    width: 88%;
-    position: absolute;
-  }
-  div.stats {
+   div.stats {
     width: max-content;
     height: 25%;
-    color: red;
-    font-size: 20px;
+    color: #944caf;
+    font-size: 18px;
     position: relative;
-    bottom: 10px;
-  }
-  div.games-played,
-  div.remains,
-  div.accuracy,
-  #reset {
-    height: 20%;
-  }
-  .cardArea {
-    width: 99%;
-    height: 74%;
-    position: relative;
-    top: 75px;
-    left: 1px;
-  }
+    top: 0px;
+    left: 0px;
 }
+div.games-played, 
+div.remains, 
+div.accuracy, 
+#reset {
+  height: 18%;
+}
+div.games-played, 
+div.remains, 
+div.accuracy, 
+div.timeout, 
+#reset {
+  display: inline-block;
+  margin: 3px;
+}
+.label, .value {
+  margin: 8px 6px;
+}
+div.timeout{
+ 
+  position: relative;
+  left: 65px;
+}
+
+#clock{
+  border-radius: 50%;
+}
+
+#togglePauseClock{
+    margin-left: 33px;
+    position: relative;
+    left: 171px;
+    font-size: 16px;
+
+}
+    
+.btn-primary {
+  color: #fff;
+  background-color: #db86e9;
+  border-color: #db86e9;
+  font-size: 16px;
+}
+#reset{
+  position: relative;
+  right: 48px;
+  height: 30%;
+}
+.cardArea {
+  width: 86%;
+  height: 107%;
+  position: absolute;
+  top: 157px;
+  left: 5px;
+}
+.cardContainer {
+  height: 12%;
+  width: 25.6%;
+  /* background-color: lightblue; */
+  float: left;
+  cursor: pointer;
+}
+div.intro {
+  width: 30%;
+  height: 63%;
+  position: absolute;
+  top: 170px;
+  right: 10px;
+  padding: 0;
+}
+.h2 {
+    font-size: 1em;
+}
+p{
+  font-size: 15px;
+}
+
+.modal {
+  display: block;
+  width: 350px;
+  max-width: 100%;
+  height: 634px;
+  max-height: 100%;
+  position: fixed;
+  z-index: 100;
+  left: 35%;
+  top: 36%;
+  transform: translate(-50%, -51%);
+  box-shadow: 0 0 55px 10px rgba(1, 0, 0, 0.6);
+}
+button.start-btn{
+  position: relative;
+  left: 116px;
+  border-radius: 11%;
+}
+
+
+}
+/* ----------For mobile phones: -------------*/
+

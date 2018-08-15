@@ -101,9 +101,10 @@ function createNewCard(picture) {
 function card_clicked() {
     // true - assign first_card_clicked equal to the html DOM Element that was clicked, return
     var clickedCard = $(this);
-    if (clickedCard.hasClass('reveal')) {
+    if (clickedCard.hasClass('is-flipped')) {
         // debugger;    ????????????????????????????????????????????????
-        shakecard();
+        alert('hi');
+        clickedCard.addClass('shakeme');
         return;
     }
 
@@ -114,7 +115,7 @@ function card_clicked() {
         imgElement = clickedCard.find('.image img');
         imgsrcFirst = imgElement.attr('src');
         //change cardback to  front =================================
-        first_card_clicked.addClass('reveal is-flipped');
+        first_card_clicked.addClass('is-flipped');
         return;
     }
     //when use this without $() jQuery wraper. use else if (second_card_clicked == null) {
@@ -122,7 +123,8 @@ function card_clicked() {
     //click 2nd card. and compare immediately
     else {
         if (first_card_clicked === clickedCard) {
-            shakecard();
+            clickedCard.addClass('shakeme');
+            alert('hi');
             return;
         }
         second_card_clicked = clickedCard;
@@ -135,7 +137,7 @@ function card_clicked() {
         imgElement = clickedCard.find('.image img');
         imgsrcSecond = imgElement.attr('src');
 
-        second_card_clicked.addClass('reveal is-flipped');
+        second_card_clicked.addClass('is-flipped');
         console.log('second card image src ', imgsrcSecond);
 
         //=======================compare two card src
@@ -180,9 +182,6 @@ function card_clicked() {
     }
 } //end card_clicked
 
-function shakecard() {
-    first_card_clicked.addClass('shakeme');
-}
 
 function flipback() {
     //put back ability to click cards
@@ -194,8 +193,8 @@ function flipback() {
     console.log('matchs ', matches);
     console.log('accuracy', accuracy);
 
-    first_card_clicked.removeClass('reveal is-flipped');
-    second_card_clicked.removeClass('reveal is-flipped');
+    first_card_clicked.removeClass('is-flipped');
+    second_card_clicked.removeClass('is-flipped');
     first_card_clicked = null;
     second_card_clicked = null;
     display_stats();

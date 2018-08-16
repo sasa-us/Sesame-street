@@ -1,6 +1,7 @@
 $(document).ready(initializeApp);
 
 function initializeApp() {
+    console.log('unclick pasue, clockflag is ', clockflag);
     createRandonCard();
     eventHandler();
 } //end initializApp
@@ -10,7 +11,6 @@ function eventHandler() {
     $('#reset').on("click", reset);
     $('#togglePauseClock').on("click", togglePauseClock);
 }
-
 
 var imgElement;
 var imgsrcFirst;
@@ -35,10 +35,12 @@ var remainsValue = $('.remains .value');
 var accuracyValue = $('.accuracy .value');
 
 var audio = document.getElementById("myAudio");
+// 0 is runing --> after click should be stop
+//click pause -> flag change to 1
+var clockflag = 0;
+var timerflag = 0;
 
-var resetButton = $('#reset');
-
-//==============  createRandonCard --------------------
+//------------------createRandonCard -------------------->
 function createRandonCard() {
     var cardSrcArr = ["assets/images/elmo.jpg", "assets/images/Abby.png", "assets/images/bert.png",
         "assets/images/bigBird.png", "assets/images/Cookie.png", "assets/images/Count.png",
@@ -53,9 +55,6 @@ function createRandonCard() {
         var randomElement = copy[randomIndex];
         randomizedArray.push(randomElement);
         copy.splice(randomIndex, 1);
-        //cut 1 from array. then go into while , this time copy.length will minus 1.
-        //while loop will run until it be 0 ( cut all ) while(0): means condition will always be false
-        // code in while(0) will never get executed. 
     }
     console.log('randomizedArray', randomizedArray);
 
@@ -67,18 +66,6 @@ function createRandonCard() {
         $(".cardArea").append(container);
     }
 } //end createRandonCard
-/*
-      <div class="cardContainer">
-        <div class="card">
-          <div class='image'>
-             <img class='pic' src="images/Abby.png" alt="Abby"> 
-          </div>
-          <div class='coveringSide'>
-            <img src="images/card-back.jpg" alt="back">
-          </div>
-        </div>
-      </div>
-*/
 
 function createNewCard(picture) {
     var container = $("<div>").addClass('cardContainer');
@@ -102,10 +89,10 @@ function card_clicked() {
     // true - assign first_card_clicked equal to the html DOM Element that was clicked, return
     var clickedCard = $(this);
     if (clickedCard.hasClass('is-flipped')) {
-        // debugger;    ????????????????????????????????????????????????
-        alert('hi');
+        // alert('hi');
         clickedCard.addClass('shakeme');
         return;
+        //after action implement it should remove shakeme again
     }
 
     //click 1st card
@@ -123,8 +110,8 @@ function card_clicked() {
     //click 2nd card. and compare immediately
     else {
         if (first_card_clicked === clickedCard) {
-            clickedCard.addClass('shakeme');
-            alert('hi');
+            // clickedCard.addClass('shakeme');
+            // alert('hi');
             return;
         }
         second_card_clicked = clickedCard;
@@ -157,6 +144,7 @@ function card_clicked() {
             if (match_counter == total_possible_matches) {
                 console.log("win");
                 audio.play();
+                winModal();
                 //disable all card when win
                 $('.cardArea').off("click");
                 console.log('in card_clicked attemps: ', attempts);
@@ -173,10 +161,7 @@ function card_clicked() {
             //make cards not clickable. either remove the click handler or
             //put some property class on it make it unclick
             $('.cardArea').off("click");
-            setTimeout(flipback, 1000);
-            // Be wary of waiting programmatically but not being able to control the user from clicking on cards while the program waits execute the reset of the code
-            // Show card back on both elements that are flipped over
-
+            setTimeout(flipback, 700);
             return;
         }
     }
@@ -203,15 +188,28 @@ function flipback() {
     if (remains == 0) {
         //unclick all card
         $('.cardArea').off("click");
-
+        //time pause effect 
+        togglePauseClock();
+        $('#togglePauseClock').hide();
         //use model to show the result
         popUploseModal();
-        $('.cardArea').on('click', alertModal);
+        $('.cardArea').on('click', timeoutModal);
     }
 } //flipback()
 
+function frozenCardArea() {
+    $('.cardArea').off("click");
+    $('.cardArea').on('click', timeoutModal);
 
+}
 //----------------------below are Modal ----------------------------->
+function winModal() {
+    $('#win-modelShadow').css('display', 'block');
+    setTimeout(function () {
+        $('#win-modelShadow').css('display', 'none');
+    }, 4000);
+}
+
 function popUploseModal() {
     $('#modelShadow').css('display', 'block');
     setTimeout(function () {
@@ -219,12 +217,12 @@ function popUploseModal() {
     }, 4000);
 } // end popUp()
 
-function alertModal() {
-    alert('time out, please click reset to play');
-    //need a modal here
+function timeoutModal() {
+    $('#timeout-modelShadow').css('display', 'block');
+    setTimeout(function () {
+        $('#timeout-modelShadow').css('display', 'none');
+    }, 4000);
 }
-
-
 
 
 function closeWelcomeModal() {
@@ -275,36 +273,47 @@ function countDown() {
     if (countDownNumber == 0) {
         $('#go-modelShadow').css('display', 'none');
         clearInterval(countDownInterval);
-
-        togglePauseClock();
+        changeClock();
+        changeTimer();
+        // togglePauseClock();
     }
 }
 
-
 //-------------------------------below Timer --------------------------------------->
 function togglePauseClock() {
+    // $('#timeout-modelShadow').css('display', 'none');
+    // $('.cardArea').on('click', '.card', card_clicked);
+    toggleFlag();
+    
     changeClock();
     changeTimer();
 }
-// 0 is runing --> after click should be stop
-//click pause -> flag change to 1
-var clockflag = 0;
-var timerflag = 0;
-console.log('unclick pasue, clockflag is ', clockflag);
+
+function toggleFlag() {
+    // debugger;
+    if (clockflag == 1 && timerflag == 1) {
+        clockflag = 0;
+        timerflag = 0;
+    } else if (clockflag == 0 && timerflag == 0) {
+        clockflag = 1;
+        timerflag = 1;
+    }
+    console.log('after reset and start', clockflag);
+}
 
 function changeClock() {
+    // debugger;
     console.log('clockflag is ', clockflag)
     if (clockflag == 1) {
         $('.cardArea').off("click");
         $('#clock').attr('src', 'assets/images/stopclock.jpg');
         $('#togglePauseClock').text('Start');
-        clockflag = 0;
+        // clockflag = 0;
     } else if (clockflag == 0) {
         $('.cardArea').on('click', '.card', card_clicked);
         $('#clock').attr('src', 'assets/images/Clock.gif');
-
         $('#togglePauseClock').text('Pause');
-        clockflag = 1;
+        // clockflag = 1;
     }
 }
 
@@ -312,10 +321,8 @@ function changeTimer() {
     console.log('timer flag is ', timerflag);
     if (timerflag == 1) {
         stopTimer();
-        timerflag = 0;
     } else if (timerflag == 0) {
         startTimer();
-        timerflag = 1;
     }
 }
 var counter = null;
@@ -326,17 +333,18 @@ function stopTimer() {
 }
 
 function startTimer() {
-    // changeClock();
     timer();
     counter = setInterval(timer, 1000);
 }
-
 
 var time = 61; //miao
 function timer() {
     time--;
     if (time <= 0) {
         $('#timer').html('0:00');
+        timeoutModal();
+        $('#clock').attr('src', 'assets/images/stopclock.jpg');
+        frozenCardArea();
         stopTimer();
         return;
     }
@@ -350,18 +358,20 @@ function timer() {
     }
 }
 
+// -------------------  reset & display result ---------------------->
 function reset() {
     reset_stats();
     $('.is-flipped').removeClass('is-flipped');
+    $('#togglePauseClock').show();
 } //end reset()
 
 function reset_stats() {
     initialTimer();
     initialResult();
     display_stats();
-} //end reset_stats()
-function initialResult() {
+}
 
+function initialResult() {
     matches = 0;
     attempts = 0;
     accuracy = 0;
@@ -372,12 +382,13 @@ function initialResult() {
 function initialTimer() {
     $('#timer').html('1:00');
     time = 61;
-    clockflag = 0;
-    timerflag = 0;
+    clockflag = 1;
+    timerflag = 1;
     stopTimer();
 
     console.log('after reset time flag is ', timerflag);
     $('.cardArea').off("click");
+    // frozenCardArea();
     $('#clock').attr('src', 'assets/images/stopclock.jpg');
     $('#togglePauseClock').text('Start');
 }

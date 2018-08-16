@@ -20,7 +20,6 @@ body {
   height: 100vh;
   margin: 0 auto;
   text-shadow: 2px 3px 9px grey;
-
 }
 
 header {
@@ -39,12 +38,12 @@ main {
 
 div.stats {
   display: inline-block;
-    position: absolute;
-    left: 35px;
-    top: 55px;
-    height: 10%;
-    width: max-content;
-    font-size: 22px;
+  position: absolute;
+  left: 35px;
+  top: 55px;
+  height: 10%;
+  width: max-content;
+  font-size: 22px;
 }
 
 div.games-played,
@@ -56,18 +55,17 @@ div.timeout,
   margin: 10px;
 }
 
-.stats span{
+.stats span {
   /* padding: 0 15px; */
   margin: 0 2px;
 }
+
 div.timeout img,
 div#timer {
   width: 50px;
   margin: auto;
   display: inline-block;
 }
-
-
 
 .value {
   border-style: outset;
@@ -84,7 +82,7 @@ buttom#reset {
   font-size: 28px;
 }
 
-/* -----------------card=----------------------------  */
+/* -----------------card ---------------------------  */
 
 .cardArea {
   width: 65%;
@@ -117,6 +115,7 @@ buttom#reset {
   transition: transform 1s;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  /* need remove hidden to show shake effect */
 }
 
 .container:hover .card {
@@ -132,7 +131,6 @@ buttom#reset {
   backface-visibility:hidden; */
 }
 
-
 .image img,
 .coveringSide img {
   width: 80%;
@@ -147,10 +145,8 @@ buttom#reset {
   margin: auto;
 }
 
-/* new added-------------- */
-
 .card .image {
-  transform: rotateY(180deg); 
+  transform: rotateY(180deg);
   transform: translateZ(-1px);
 }
 
@@ -158,19 +154,10 @@ buttom#reset {
   transform: rotateY(180deg);
 }
 
-.card .coveringSide{
+.card .coveringSide {
   transform: translateZ(1px);
 }
-/* ------------------------ */
-/* original one */
-/* .card.reveal .coveringSide img {
-  display: none;
-} */
 
-/* .card.is-flipped {
-  transform: rotateY(180deg);
-} */
-/* ---------------------------- */
 img:hover {
   webkit-filter: blur(4px);
   /* Chrome, Safari, Opera */
@@ -183,21 +170,43 @@ img:hover {
 }
 
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
-
 /* -------------- introduction --------------------- */
+
 div.intro {
   width: 30%;
   height: 60%;
@@ -205,6 +214,7 @@ div.intro {
   top: 186px;
   right: 7px;
 }
+
 .intro p {
   /* margin: 10px; */
 }
@@ -269,8 +279,8 @@ div.intro {
   text-align: center;
 }
 
-
 /* -----------gomodal------------------ */
+
 #go-modelShadow {
   position: fixed;
   left: 0;
@@ -289,13 +299,37 @@ div.intro {
   width: 50%;
   min-width: 50%;
   min-height: 50%;
- 
   background-repeat: no-repeat;
   transform: translate(-50%, -50%);
 }
 
 .countdown {
   color: red;
+}
+
+/* -------------win modal ------------- */
+
+#win-modelShadow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+  display: none;
+  z-index: 10;
+}
+
+#win-modelBody {
+  position: fixed;
+  left: 65%;
+  top: 50%;
+  width: 89%;
+  min-width: 87%;
+  min-height: 67%;
+  background-image: url(../images/win.1.jpg);
+  background-repeat: no-repeat;
+  transform: translate(-50%, -50%);
 }
 
 /* -------------lose modal ------------ */
@@ -313,12 +347,12 @@ div.intro {
 
 #modelBody {
   position: fixed;
-  left: 72%;
-  top: 80%;
-  width: 50%;
+  left: 68%;
+  top: 50%;
+  width: 93%;
   min-width: 50%;
-  min-height: 50%;
-  background-image: url("../images/cry.gif");
+  min-height: 83%;
+  background-image: url(../images/lostmodal.jpg);
   background-repeat: no-repeat;
   transform: translate(-50%, -50%);
 }
@@ -331,24 +365,46 @@ div.intro {
   width: 75%;
 }
 
+/* ----------timeout-modal------------------- */
+
+#timeout-modelShadow {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+#timeout-modelBody {
+  position: fixed;
+  left: 65%;
+  top: 50%;
+  width: 89%;
+  min-width: 87%;
+  min-height: 67%;
+  background-image: url(../images/timeoutModal.jpg);
+  background-repeat: no-repeat;
+  transform: translate(-50%, -50%);
+}
+
 /* ------------ for ipad -------------------- */
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 1) {
-    main {
-      /* background-color: pink; */
-      width: 100%;
-      height: 52%;
-      position: relative;
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+  main {
+    /* background-color: pink; */
+    width: 100%;
+    height: 52%;
+    position: relative;
   }
-  div.accuracy, 
-  div.timeout, 
+  div.accuracy,
+  div.timeout,
   #reset {
     display: inline-block;
     margin: 2px 26px;
-}
- 
+  }
   div.stats {
     display: inline-block;
     position: absolute;
@@ -357,102 +413,92 @@ div.intro {
     height: 17%;
     width: max-content;
     font-size: 20px;
-}
-
-div.timeout {
-  float: right;
-}
-div.games-played, 
-div.remains, 
-div.accuracy, 
-div.timeout, 
-#reset {
-  display: inline-block;
-  margin: 1px 23px;
-}
-
-
-#reset,
-#togglePauseClock {
+  }
+  div.timeout {
+    float: right;
+  }
+  div.games-played,
+  div.remains,
+  div.accuracy,
+  div.timeout,
+  #reset {
+    display: inline-block;
+    margin: 1px 23px;
+  }
+  #reset,
+  #togglePauseClock {
     position: relative;
     left: 210px;
     font-size: 15px;
-}
-
-.cardArea {
-  width: 74%;
-  height: 89%;
-  position: absolute;
-  left: 38px;
-  /* bottom: -12px; */
-  top: 148px;
-  margin-top: 0px;
-}
-.cardContainer {
-  height: 25%;
-  width: 25.6%;
-
-  /* height: 17%;
+  }
+  .cardArea {
+    width: 74%;
+    height: 89%;
+    position: absolute;
+    left: 38px;
+    /* bottom: -12px; */
+    top: 148px;
+    margin-top: 0px;
+  }
+  .cardContainer {
+    height: 25%;
+    width: 25.6%;
+    /* height: 17%;
   width: 16.6%; */
-  /* background-color: lightblue; */
-  float: left;
-  cursor: pointer;
-}
-
-.card {
-  background-color: transparent;
-  border: 0;
-  height: 100%;
-  width: 97%;
-  position: relative;
-  left: 10%;
-  top: 5%;
-  transition: transform 1s;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-.image img, .coveringSide img {
-  width: 60%;
-  height: 69%;
-  border-radius: 50%;
-  position: relative;
-  top: 65%;
-  /* transition: transform .2s; */
-  transform: translateY(-50%);
-  display: block;
-  margin: auto;
-}
-
-div.intro {
-  width: 38%;
-  height: 60%;
-  position: absolute;
-  top: 186px;
-  right: 38px;
-}
-.h2, h2 {
-  width: 180px;
-  font-size: 1.6rem;
-}
-
+    /* background-color: lightblue; */
+    float: left;
+    cursor: pointer;
+  }
+  .card {
+    background-color: transparent;
+    border: 0;
+    height: 100%;
+    width: 97%;
+    position: relative;
+    left: 10%;
+    top: 5%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+  .image img,
+  .coveringSide img {
+    width: 60%;
+    height: 69%;
+    border-radius: 50%;
+    position: relative;
+    top: 65%;
+    /* transition: transform .2s; */
+    transform: translateY(-50%);
+    display: block;
+    margin: auto;
+  }
+  div.intro {
+    width: 38%;
+    height: 60%;
+    position: absolute;
+    top: 186px;
+    right: 38px;
+  }
+  .h3,
+  h3 {
+    width: 180px;
+    font-size: 1.6rem;
+  }
 }
 
 /* ----------for iphone 6,6S,7,8---------- */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
 
-   body{
-   background: url("../images/phoneback2.1.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 100vw;
-  height: 100vh;
-  margin: 0 auto;
-   }
-
-   div.stats {
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  body {
+    background: url("../images/phoneback2.1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+  }
+  div.stats {
     width: max-content;
     height: 25%;
     color: #944caf;
@@ -460,102 +506,93 @@ div.intro {
     position: relative;
     top: 0px;
     left: 0px;
-}
-div.games-played, 
-div.remains, 
-div.accuracy, 
-#reset {
-  height: 18%;
-}
-div.games-played, 
-div.remains, 
-div.accuracy, 
-div.timeout, 
-#reset {
-  display: inline-block;
-  margin: 3px;
-}
-.label, .value {
-  margin: 8px 6px;
-}
-div.timeout{
- 
-  position: relative;
-  left: 65px;
-}
-
-#clock{
-  border-radius: 50%;
-}
-
-#togglePauseClock{
+  }
+  div.games-played,
+  div.remains,
+  div.accuracy,
+  #reset {
+    height: 18%;
+  }
+  div.games-played,
+  div.remains,
+  div.accuracy,
+  div.timeout,
+  #reset {
+    display: inline-block;
+    margin: 3px;
+  }
+  .label,
+  .value {
+    margin: 8px 6px;
+  }
+  div.timeout {
+    position: relative;
+    left: 65px;
+  }
+  #clock {
+    border-radius: 50%;
+  }
+  #togglePauseClock {
     margin-left: 33px;
     position: relative;
     left: 171px;
     font-size: 16px;
-
-}
-    
-.btn-primary {
-  color: #fff;
-  background-color: #db86e9;
-  border-color: #db86e9;
-  font-size: 16px;
-}
-#reset{
-  position: relative;
-  right: 48px;
-  height: 30%;
-}
-.cardArea {
-  width: 86%;
-  height: 107%;
-  position: absolute;
-  top: 157px;
-  left: 5px;
-}
-.cardContainer {
-  height: 12%;
-  width: 25.6%;
-  /* background-color: lightblue; */
-  float: left;
-  cursor: pointer;
-}
-div.intro {
-  width: 30%;
-  height: 63%;
-  position: absolute;
-  top: 170px;
-  right: 10px;
-  padding: 0;
-}
-.h2 {
+  }
+  .btn-primary {
+    color: #fff;
+    background-color: #db86e9;
+    border-color: #db86e9;
+    font-size: 16px;
+  }
+  #reset {
+    position: relative;
+    right: 48px;
+    height: 30%;
+  }
+  .cardArea {
+    width: 86%;
+    height: 107%;
+    position: absolute;
+    top: 157px;
+    left: 5px;
+  }
+  .cardContainer {
+    height: 12%;
+    width: 25.6%;
+    /* background-color: lightblue; */
+    float: left;
+    cursor: pointer;
+  }
+  div.intro {
+    width: 30%;
+    height: 63%;
+    position: absolute;
+    top: 170px;
+    right: 10px;
+    padding: 0;
+  }
+  .h3 {
     font-size: 1em;
+  }
+  p {
+    font-size: 15px;
+  }
+  .modal {
+    display: block;
+    width: 350px;
+    max-width: 100%;
+    height: 634px;
+    max-height: 100%;
+    position: fixed;
+    z-index: 100;
+    left: 35%;
+    top: 36%;
+    transform: translate(-50%, -51%);
+    box-shadow: 0 0 55px 10px rgba(1, 0, 0, 0.6);
+  }
+  button.start-btn {
+    position: relative;
+    left: 116px;
+    border-radius: 11%;
+  }
 }
-p{
-  font-size: 15px;
-}
-
-.modal {
-  display: block;
-  width: 350px;
-  max-width: 100%;
-  height: 634px;
-  max-height: 100%;
-  position: fixed;
-  z-index: 100;
-  left: 35%;
-  top: 36%;
-  transform: translate(-50%, -51%);
-  box-shadow: 0 0 55px 10px rgba(1, 0, 0, 0.6);
-}
-button.start-btn{
-  position: relative;
-  left: 116px;
-  border-radius: 11%;
-}
-
-
-}
-/* ----------For mobile phones: -------------*/
-

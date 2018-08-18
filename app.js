@@ -307,12 +307,12 @@ function changeClock() {
     if (clockflag == 1) {
         $('.cardArea').off("click");
         $('#clock').attr('src', 'assets/images/stopclock.jpg');
-        $('#togglePauseClock').text('Start');
+        $('#togglePauseClock').text('start');
         // clockflag = 0;
     } else if (clockflag == 0) {
         $('.cardArea').on('click', '.card', card_clicked);
         $('#clock').attr('src', 'assets/images/Clock.gif');
-        $('#togglePauseClock').text('Pause');
+        $('#togglePauseClock').text('pause');
         // clockflag = 1;
     }
 }

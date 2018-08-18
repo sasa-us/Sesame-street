@@ -165,9 +165,8 @@ buttom#reset {
   transform: translateZ(1px);
 }
 
-img:hover {
+.card img:hover {
   webkit-filter: blur(4px);
-  /* Chrome, Safari, Opera */
   filter: drop-shadow(8px 8px 10px gray)
 }
 

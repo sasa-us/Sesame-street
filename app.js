@@ -185,6 +185,10 @@ function flipback() {
     display_stats();
     //user has 4 times to play 
 
+    checkwin();
+} //flipback()
+
+function checkwin() {
     if (remains == 0) {
         //unclick all card
         $('.cardArea').off("click");
@@ -195,7 +199,7 @@ function flipback() {
         popUploseModal();
         $('.cardArea').on('click', timeoutModal);
     }
-} //flipback()
+}
 
 function frozenCardArea() {
     $('.cardArea').off("click");

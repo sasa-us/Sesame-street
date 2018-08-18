@@ -34,6 +34,10 @@ main {
   position: relative;
 }
 
+button.start-btn {
+  cursor: pointer;
+}
+
 /* -------------------status ---------------------- */
 
 div.stats {
@@ -58,6 +62,10 @@ div.timeout,
 .stats span {
   /* padding: 0 15px; */
   margin: 0 2px;
+}
+
+div.timeout {
+  width: 120px;
 }
 
 div.timeout img,
@@ -85,16 +93,17 @@ buttom#reset {
 /* -----------------card ---------------------------  */
 
 .cardArea {
-  width: 65%;
-  height: 100%;
+  width: 70%;
+  height: 80%;
   position: absolute;
-  top: 164px;
-  left: 84px;
+  top: 150px;
+  left: 46px;
 }
 
 .cardContainer {
   height: 25%;
   width: 16.6%;
+  margin-top: 20px;
   /* background-color: lightblue; */
   float: left;
   cursor: pointer;
@@ -107,11 +116,9 @@ buttom#reset {
 .card {
   background-color: transparent;
   border: 0;
-  height: 90%;
+  height: 100%;
   width: 80%;
   position: relative;
-  left: 10%;
-  top: 5%;
   transition: transform 1s;
   transform-style: preserve-3d;
   backface-visibility: hidden;
@@ -133,8 +140,8 @@ buttom#reset {
 
 .image img,
 .coveringSide img {
-  width: 80%;
-  height: 80%;
+  width: 99%;
+  height: 100%;
   border-radius: 50%;
   position: relative;
   top: 50%;
@@ -233,7 +240,7 @@ div.intro {
 
 .modal {
   display: block;
-  width: 500px;
+  width: 456px;
   max-width: 100%;
   height: 700px;
   max-height: 100%;
@@ -353,6 +360,7 @@ div.intro {
   min-width: 50%;
   min-height: 83%;
   background-image: url(../images/lostmodal.jpg);
+  background-size: contain;
   background-repeat: no-repeat;
   transform: translate(-50%, -50%);
 }
@@ -387,12 +395,13 @@ div.intro {
   min-height: 67%;
   background-image: url(../images/timeoutModal.jpg);
   background-repeat: no-repeat;
+  background-size: contain;
   transform: translate(-50%, -50%);
 }
 
 /* ------------ for ipad -------------------- */
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
   main {
     /* background-color: pink; */
     width: 100%;
@@ -416,6 +425,9 @@ div.intro {
   }
   div.timeout {
     float: right;
+    position: relative;
+    bottom: 6px;
+    right: 164px;
   }
   div.games-played,
   div.remains,
@@ -428,25 +440,29 @@ div.intro {
   #reset,
   #togglePauseClock {
     position: relative;
-    left: 210px;
-    font-size: 15px;
+    left: 37px;
+    font-size: 18px;
+  }
+  #togglePauseClock {
+    margin-left: 90px;
   }
   .cardArea {
-    width: 74%;
-    height: 89%;
+    width: 85%;
+    height: 84%;
     position: absolute;
-    left: 38px;
+    left: 5px;
     /* bottom: -12px; */
-    top: 148px;
+    top: 167px;
     margin-top: 0px;
   }
   .cardContainer {
-    height: 25%;
+    height: 27%;
     width: 25.6%;
     /* height: 17%;
   width: 16.6%; */
     /* background-color: lightblue; */
     float: left;
+    margin: 0 11px;
     cursor: pointer;
   }
   .card {
@@ -463,11 +479,11 @@ div.intro {
   }
   .image img,
   .coveringSide img {
-    width: 60%;
-    height: 69%;
+    width: 77%;
+    height: 89%;
     border-radius: 50%;
     position: relative;
-    top: 65%;
+    top: 50%;
     /* transition: transform .2s; */
     transform: translateY(-50%);
     display: block;
@@ -478,18 +494,42 @@ div.intro {
     height: 60%;
     position: absolute;
     top: 186px;
-    right: 38px;
+    right: 45px;
+    padding: 0px;
   }
   .h3,
   h3 {
     width: 180px;
     font-size: 1.6rem;
   }
+  #timeout-modelBody,
+  #modelBody {
+    position: fixed;
+    left: 50%;
+    top: 59%;
+    width: 65%;
+    min-width: 65%;
+    min-height: 60%;
+  }
+  .modal {
+    display: block;
+    width: 456px;
+    max-width: 100%;
+    height: 632px;
+    max-height: 100%;
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top: 47%;
+    transform: translate(-50%, -50%);
+    /* background: white; */
+    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+  }
 }
 
 /* ----------for iphone 6,6S,7,8---------- */
 
-@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (min-width: 375px) and (max-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
   body {
     background: url("../images/phoneback2.1.jpg");
     background-repeat: no-repeat;
@@ -536,7 +576,10 @@ div.intro {
     margin-left: 33px;
     position: relative;
     left: 171px;
+    height: 36px;
     font-size: 16px;
+    padding: 0px 10px;
+    width: 68px;
   }
   .btn-primary {
     color: #fff;
@@ -547,21 +590,32 @@ div.intro {
   #reset {
     position: relative;
     right: 48px;
-    height: 30%;
+    height: 36px;
+    padding: 0px 10px;
+    width: 68px;
   }
   .cardArea {
-    width: 86%;
-    height: 107%;
+    width: 85%;
+    height: 84%;
     position: absolute;
-    top: 157px;
-    left: 5px;
+    top: 138px;
+    left: 8px;
   }
   .cardContainer {
-    height: 12%;
+    height: 13%;
     width: 25.6%;
     /* background-color: lightblue; */
     float: left;
+    margin-top: 13px;
     cursor: pointer;
+  }
+  div.cardContainer:hover {
+    transform: scale(1.1);
+  }
+  .cardContainer img:hover {
+    webkit-filter: blur(4px);
+    /* Chrome, Safari, Opera */
+    filter: drop-shadow(8px 8px 10px gray)
   }
   div.intro {
     width: 30%;
@@ -585,14 +639,148 @@ div.intro {
     max-height: 100%;
     position: fixed;
     z-index: 100;
-    left: 35%;
-    top: 36%;
+    left: 49%;
+    top: 51%;
     transform: translate(-50%, -51%);
     box-shadow: 0 0 55px 10px rgba(1, 0, 0, 0.6);
+  }
+  #modal-overlay .modal {
+    background-size: contain;
+    background-position: center;
+  }
+  #timeout-modelBody,
+  #modelBody {
+    position: fixed;
+    left: 50%;
+    top: 59%;
+    width: 65%;
+    min-width: 65%;
+    min-height: 60%;
   }
   button.start-btn {
     position: relative;
     left: 116px;
     border-radius: 11%;
+  }
+}
+
+/* ---------- iphone 4 ------------- */
+
+@media only screen and (min-width: 320px) and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  body {
+    background: url("../images/phoneback2.1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+  }
+  div.stats {
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 13%;
+    width: max-content;
+    font-size: 12px;
+  }
+  div.games-played,
+  div.remains,
+  div.accuracy,
+  div.timeout,
+  #reset {
+    display: inline-block;
+    margin: 1px 5px;
+    height: 26px;
+  }
+  div.remains {
+    position: relative;
+    left: 37px;
+  }
+  #togglePauseClock {
+    right: 73px;
+  }
+  div.timeout {
+    position: relative;
+    left: 127px;
+    margin: 0px;
+    width: 90px;
+  }
+  div.timeout img,
+  div#timer {
+    width: 35px;
+    margin: 0 auto;
+    display: inline-block;
+  }
+  #togglePauseClock,
+  #reset {
+    position: relative;
+    padding: 0px 6px;
+    font-size: 12px;
+    padding: 2px;
+    height: auto;
+  }
+  #togglePauseClock {
+    right: 82px;
+  }
+  #reset {
+    right: 70px;
+    bottom: 0px;
+  }
+  .modal {
+    width: 65%;
+    max-width: 100%;
+    height: 65%;
+  }
+  .start-btn {
+    position: absolute;
+    bottom: 81px;
+    width: 39%;
+    right: 62px;
+  }
+  .cardArea {
+    width: 95%;
+    height: 80%;
+    position: absolute;
+    top: 62px;
+    left: 10px;
+    padding: 0;
+  }
+  .cardContainer {
+    height: 17%;
+    width: 16.6%;
+    margin-top: 34px;
+    /* background-color: lightblue; */
+    float: left;
+    cursor: pointer;
+  }
+  .card {
+    height: 100%;
+    width: 95%;
+  }
+  div.intro {
+    width: 90%;
+    height: 9%;
+    position: absolute;
+    top: 326px;
+    right: 36px;
+    font-size: 10px;
+  }
+  .h3,
+  h3 {
+    font-size: 14px;
+    margin-bottom: 0px;
+  }
+  .intro p {
+    margin-bottom: 0px;
+  }
+  #timeout-modelBody,
+  #modelBody {
+    position: fixed;
+    left: 49%;
+    top: 53%;
+    width: 60%;
+    min-width: 54%;
+    min-height: 53%;
   }
 }

@@ -167,7 +167,7 @@ buttom#reset {
 
 .card img:hover {
   webkit-filter: blur(4px);
-  filter: drop-shadow(8px 8px 10px gray)
+  filter: drop-shadow(8px 8px 10px gray);
 }
 
 .shakeme {

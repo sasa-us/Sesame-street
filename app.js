@@ -19,12 +19,12 @@ var wrongTimes = 0;
 
 var first_card_clicked = null;
 var second_card_clicked = null;
-var total_possible_matches = 2;
+var total_possible_matches = 3;
 var match_counter = 0;
 
 var matches = 0;
 var attempts = 0;
-var remains = 4;
+var remains = 10;
 var accuracy = 0;
 var games_played = 0;
 
@@ -364,6 +364,7 @@ function timer() {
 
 // -------------------  reset & display result ---------------------->
 function reset() {
+    createRandonCard();
     reset_stats();
     $('.is-flipped').removeClass('is-flipped');
     $('#togglePauseClock').show();
@@ -379,8 +380,10 @@ function initialResult() {
     matches = 0;
     attempts = 0;
     accuracy = 0;
-    remains = 4
+    remains = 10;
     match_counter = 0;
+    first_card_clicked = null;
+    second_card_clicked = null;
 }
 
 function initialTimer() {

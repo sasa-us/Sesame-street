@@ -119,9 +119,7 @@ buttom#reset {
   height: 100%;
   width: 80%;
   position: relative;
-  transition: transform 1s;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+  /* backface-visibility: hidden; */
   /* need remove hidden to show shake effect */
 }
 
@@ -134,8 +132,13 @@ buttom#reset {
   height: 100%;
   width: 100%;
   position: absolute;
-  /* transition: transform 1s;
-  backface-visibility:hidden; */
+  /* transition: transform 1s; */
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.coveringSide {
+  backface-visibility:hidden;
 }
 
 .image img,
@@ -157,7 +160,7 @@ buttom#reset {
   transform: translateZ(-1px);
 }
 
-.card.is-flipped {
+.card.is-flipped .coveringSide,.card.card.is-flipped .image {
   transform: rotateY(180deg);
 }
 
@@ -172,7 +175,7 @@ buttom#reset {
 
 .shakeme {
   animation: shake 0.5s;
-  animation-iteration-count: 2s;
+  animation-iteration-count: 1;
 }
 
 @keyframes shake {
@@ -474,6 +477,8 @@ div.intro {
     top: 5%;
     transition: transform 1s;
     transform-style: preserve-3d;
+  }
+  .coveringSide {
     backface-visibility: hidden;
   }
   .image img,
@@ -528,7 +533,7 @@ div.intro {
 
 /* ----------for iphone 6,6S,7,8---------- */
 
-@media only screen and (min-width: 375px) and (max-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+@media screen and (min-width: 375px) and (max-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
   body {
     background: url("../images/phoneback2.1.jpg");
     background-repeat: no-repeat;
@@ -574,7 +579,7 @@ div.intro {
   #togglePauseClock {
     margin-left: 33px;
     position: relative;
-    left: 171px;
+    /* left: 171px; */
     height: 36px;
     font-size: 16px;
     padding: 0px 10px;
@@ -588,10 +593,10 @@ div.intro {
   }
   #reset {
     position: relative;
-    right: 48px;
+    /* right: 48px; */
     height: 36px;
     padding: 0px 10px;
-    width: 68px;
+    width: 48px;
   }
   .cardArea {
     width: 85%;
@@ -647,6 +652,12 @@ div.intro {
     background-size: contain;
     background-position: center;
   }
+
+  div#modal.modal {
+    position: absolute;
+    left: 182px;
+    top: 353px;
+}
   #timeout-modelBody,
   #modelBody {
     position: fixed;
@@ -658,14 +669,16 @@ div.intro {
   }
   button.start-btn {
     position: relative;
-    left: 116px;
+    left: 80px;
     border-radius: 11%;
   }
+ 
+
 }
 
 /* ---------- iphone 4 ------------- */
 
-@media only screen and (min-width: 320px) and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+@media screen and (min-width: 320px) and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
   body {
     background: url("../images/phoneback2.1.jpg");
     background-repeat: no-repeat;
@@ -701,7 +714,7 @@ div.intro {
   }
   div.timeout {
     position: relative;
-    left: 127px;
+    left: 178px;
     margin: 0px;
     width: 90px;
   }
@@ -720,11 +733,11 @@ div.intro {
     height: auto;
   }
   #togglePauseClock {
-    right: 82px;
+    right: 118px;
   }
   #reset {
-    right: 70px;
-    bottom: 0px;
+    left: 203px;
+    bottom: 23px;
   }
   .modal {
     width: 65%;
@@ -757,12 +770,21 @@ div.intro {
     height: 100%;
     width: 95%;
   }
-  div.intro {
+  /* div.intro {
     width: 90%;
     height: 9%;
     position: absolute;
     top: 326px;
     right: 36px;
+    font-size: 10px;
+  } */
+
+  div.intro {
+    width: 90%;
+    height: 9%;
+    position: absolute;
+    top: 396px;
+    /* right: 36px; */
     font-size: 10px;
   }
   .h3,

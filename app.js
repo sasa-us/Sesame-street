@@ -6,7 +6,7 @@ function initializeApp() {
     eventHandler();
 } //end initializApp
 function eventHandler() {
-    $('.cardArea').on('click', '.card', card_clicked);
+    // $('.cardArea').on('click', '.card', card_clicked);
     $('.start-btn').on('click', closeWelcomeModal);
     $('#reset').on("click", reset);
     $('#togglePauseClock').on("click", togglePauseClock);
@@ -90,7 +90,9 @@ function card_clicked() {
     var clickedCard = $(this);
     if (clickedCard.hasClass('is-flipped')) {
         // alert('hi');
+ 
         clickedCard.addClass('shakeme');
+        setTimeout(() => {clickedCard.removeClass('shakeme')}, 500);
         return;
         //after action implement it should remove shakeme again
     }
@@ -183,7 +185,6 @@ function flipback() {
     first_card_clicked = null;
     second_card_clicked = null;
     display_stats();
-    //user has 4 times to play 
 
     checkwin();
 } //flipback()

@@ -1,12 +1,11 @@
 html {
-  width: 100vw;
-  height: 100vh;
+
   font-family: "Lucida Sans", sans-serif;
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
+  
   padding: 0;
 }
 
@@ -23,12 +22,10 @@ body {
 }
 
 header {
-  /* background-color: yellow; */
   height: 10%;
 }
 
 main {
-  /* background-color: pink; */
   width: 100%;
   height: 80%;
   position: relative;
@@ -41,13 +38,10 @@ button.start-btn {
 /* -------------------status ---------------------- */
 
 div.stats {
-  display: inline-block;
-  position: absolute;
-  left: 35px;
-  top: 55px;
-  height: 10%;
-  width: max-content;
-  font-size: 22px;
+  margin-top: 88px;
+    width: max-content;
+    font-size: 22px;
+    text-align: center;
 }
 
 div.games-played,
@@ -60,7 +54,6 @@ div.timeout,
 }
 
 .stats span {
-  /* padding: 0 15px; */
   margin: 0 2px;
 }
 
@@ -95,16 +88,13 @@ buttom#reset {
 .cardArea {
   width: 70%;
   height: 80%;
-  position: absolute;
-  top: 150px;
   left: 46px;
 }
 
 .cardContainer {
-  height: 25%;
-  width: 16.6%;
+  height: 14vmin;
+    width: 14vmin;
   margin-top: 20px;
-  /* background-color: lightblue; */
   float: left;
   cursor: pointer;
 }
@@ -122,7 +112,6 @@ buttom#reset {
   /* backface-visibility: hidden; */
   /* need remove hidden to show shake effect */
 }
-
 .container:hover .card {
   opacity: 0.3;
 }
@@ -132,7 +121,6 @@ buttom#reset {
   height: 100%;
   width: 100%;
   position: absolute;
-  /* transition: transform 1s; */
   transition: transform 1s;
   transform-style: preserve-3d;
 }
@@ -148,7 +136,6 @@ buttom#reset {
   border-radius: 50%;
   position: relative;
   top: 50%;
-  /* transition: transform .2s; */
   transform: translateY(-50%);
   /* below two line make it stay at original place after flip */
   display: block;
@@ -219,13 +206,11 @@ buttom#reset {
 div.intro {
   width: 30%;
   height: 60%;
-  position: absolute;
-  top: 186px;
   right: 7px;
 }
 
 .intro p {
-  /* margin: 10px; */
+
 }
 
 /*  ------------------welcom--modal -----------------*/
@@ -267,7 +252,6 @@ div.intro {
   width: 100%;
   height: 100%;
   overflow: auto;
-  /* padding: 20px 50px 20px 20px; */
 }
 
 .start-btn {
@@ -403,7 +387,7 @@ div.intro {
 
 /* ------------ for ipad -------------------- */
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) /*and (-webkit-min-device-pixel-ratio: 1) */{
   main {
     /* background-color: pink; */
     width: 100%;
@@ -418,10 +402,9 @@ div.intro {
   }
   div.stats {
     display: inline-block;
-    position: absolute;
-    /* left: -50px; */
-    top: 60px;
-    height: 17%;
+ 
+    margin-top: 60px;
+
     width: max-content;
     font-size: 20px;
   }
@@ -429,7 +412,6 @@ div.intro {
     float: right;
     position: relative;
     bottom: 6px;
-    right: 164px;
   }
   div.games-played,
   div.remains,
@@ -450,19 +432,11 @@ div.intro {
   }
   .cardArea {
     width: 85%;
-    height: 84%;
-    position: absolute;
-    left: 5px;
-    /* bottom: -12px; */
-    top: 167px;
     margin-top: 0px;
   }
   .cardContainer {
     height: 27%;
     width: 25.6%;
-    /* height: 17%;
-  width: 16.6%; */
-    /* background-color: lightblue; */
     float: left;
     margin: 0 11px;
     cursor: pointer;
@@ -470,11 +444,6 @@ div.intro {
   .card {
     background-color: transparent;
     border: 0;
-    height: 100%;
-    width: 97%;
-    position: relative;
-    left: 10%;
-    top: 5%;
     transition: transform 1s;
     transform-style: preserve-3d;
   }
@@ -483,8 +452,8 @@ div.intro {
   }
   .image img,
   .coveringSide img {
-    width: 77%;
-    height: 89%;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     position: relative;
     top: 50%;
@@ -496,9 +465,6 @@ div.intro {
   div.intro {
     width: 38%;
     height: 60%;
-    position: absolute;
-    top: 186px;
-    right: 45px;
     padding: 0px;
   }
   .h3,
@@ -526,28 +492,50 @@ div.intro {
     left: 50%;
     top: 47%;
     transform: translate(-50%, -50%);
-    /* background: white; */
     box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
   }
 }
 
+@media only screen and (min-width: 1200px){
+  body {
+    height: 150vh;
+  }
+}
+
+
+/* Medium devices (desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1200px){ 
+  body {
+    background-color: #944caf;
+  
+  }
+
+
+ }
+
+ /* Small devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px){ 
+
+
+ }
+
 /* ----------for iphone 6,6S,7,8---------- */
 
-@media screen and (min-width: 375px) and (max-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+/* @media screen and (min-width: 375px) and (max-width: 667px) {
   body {
     background: url("../images/phoneback2.1.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0 auto;
   }
   div.stats {
     width: max-content;
-    height: 25%;
+  
     color: #944caf;
     font-size: 18px;
-    position: relative;
+ 
+    margin-top: 28px;
     top: 0px;
     left: 0px;
   }
@@ -579,7 +567,6 @@ div.intro {
   #togglePauseClock {
     margin-left: 33px;
     position: relative;
-    /* left: 171px; */
     height: 36px;
     font-size: 16px;
     padding: 0px 10px;
@@ -593,22 +580,14 @@ div.intro {
   }
   #reset {
     position: relative;
-    /* right: 48px; */
+   
     height: 36px;
     padding: 0px 10px;
-    width: 48px;
   }
-  .cardArea {
-    width: 85%;
-    height: 84%;
-    position: absolute;
-    top: 138px;
-    left: 8px;
-  }
+
   .cardContainer {
-    height: 13%;
-    width: 25.6%;
-    /* background-color: lightblue; */
+    height: 15.6vmin;
+    width: 15.6vmin;
     float: left;
     margin-top: 13px;
     cursor: pointer;
@@ -618,16 +597,13 @@ div.intro {
   }
   .cardContainer img:hover {
     webkit-filter: blur(4px);
-    /* Chrome, Safari, Opera */
+  
     filter: drop-shadow(8px 8px 10px gray)
   }
   div.intro {
-    width: 30%;
-    height: 63%;
-    position: absolute;
-    top: 170px;
-    right: 10px;
-    padding: 0;
+
+    text-align: center;
+    padding-top: 30px;
   }
   .h3 {
     font-size: 1em;
@@ -674,11 +650,11 @@ div.intro {
   }
  
 
-}
+} */
 
 /* ---------- iphone 4 ------------- */
 
-@media screen and (min-width: 320px) and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+/* @media screen and (min-width: 320px) and (max-width: 480px)  {
   body {
     background: url("../images/phoneback2.1.jpg");
     background-repeat: no-repeat;
@@ -762,7 +738,6 @@ div.intro {
     height: 17%;
     width: 16.6%;
     margin-top: 34px;
-    /* background-color: lightblue; */
     float: left;
     cursor: pointer;
   }
@@ -770,21 +745,13 @@ div.intro {
     height: 100%;
     width: 95%;
   }
-  /* div.intro {
-    width: 90%;
-    height: 9%;
-    position: absolute;
-    top: 326px;
-    right: 36px;
-    font-size: 10px;
-  } */
+
 
   div.intro {
     width: 90%;
     height: 9%;
     position: absolute;
     top: 396px;
-    /* right: 36px; */
     font-size: 10px;
   }
   .h3,
@@ -804,4 +771,4 @@ div.intro {
     min-width: 54%;
     min-height: 53%;
   }
-}
+} */

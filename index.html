@@ -15,12 +15,8 @@
 </head>
 
 <body>
-  <header> </header>
-
-  <main class="row">
-
-    <!-- <div class="col-xs-12 col-md-offset-1 col-md-10 stats"> -->
-    <div class="col-xs-12 col-md-12 stats">
+  <header> 
+    <div class="stats">
       <div class='games-played'>
         <div class="label">games played
           <span class='value'>0</span>
@@ -47,21 +43,30 @@
       <button id='reset' class="btn btn-primary " type="button">reset</button>
     </div>
 
-    <div class="col-12 col-md-12 cardArea">
-    </div>
-    <div class="col-12 col-md-12 col-lg-3 intro">
 
-      <h3 class="h3">how to play</h3>
-      <p>select 2 cards to find a pair </p>
-      <p>4 chances in 60 seconds</p>
-      <p>match 2 times to WIN</p>
-      <p>to play again: click reset first, then start</p>
 
+  </header>
+
+  <!-- <main class="row"> -->
+  <main>
+    <!-- <div class="col-xs-12 col-md-offset-1 col-md-10 stats"> -->
+    
+    <div class="col-sm-12 col-md-12 col-lg-12 cardArea">
     </div>
+    
 
   </main>
 
+<footer>
+  <div class="col-12 col-md-12 col-lg-12 intro">
+    
+    <h6 class="h6"> <span>2 matchs to WIN</span></h6>
+    
+    <h6 class="h6">play again: <span>click reset first, then start</span></h6>
+    
 
+  </div>
+</footer>
   <audio id="myAudio">
     <source src="assets/sounds/applause.mp3" type="audio/mpeg">
   </audio>

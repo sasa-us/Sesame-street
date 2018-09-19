@@ -54,8 +54,13 @@ div.timeout,
 #reset {
   display: inline-block;
   color: #f7e0a6;
+  
 }
-
+#togglePauseClock,
+#reset {
+  padding: 0.8%;
+  height: auto;
+}
 div.games-played,
 div.remains,
 div.accuracy,
@@ -296,25 +301,16 @@ h6.h6{
   display: none;
 }
 
-.modal-guts {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-}
-
 .start-btn {
-  position: absolute;
-  bottom: 154px;
-  width: 39%;
-  right: 138px;
+  position: relative;
+    bottom: 33vh;
+    width: 39%;
+    left: 33%;
 }
 
 .modal-guts img {
   width: 100%;
-  height: 100%;
+  height: auto;
   margin: 0 auto;
 }
 
@@ -445,14 +441,10 @@ h6.h6{
     margin-top: 0px;
   }
 
-
   .cardContainer {
     float: left;
     margin-top: 2px;
-    
   }
-
-
 
   div.intro {
     width: 94%;
@@ -483,32 +475,28 @@ h6.h6{
     margin-top: 0px;
   }
 
-
   .cardContainer {
     float: left;
     margin-top: 4px;
-    /* cursor: pointer; */
   }
 
   div.intro {
     width: 94%;
     height: 20%;
     right: 0px;
-    /* display: inline-table; */
     text-align: center;
   }
 
   .intro p {
     margin-bottom: 0px;
   }
-
 }
 
 /* ---end medium device --- */
 @media only screen and (min-width: 1200px) {
   .cardArea {
     flex: 0.8 0 86%;
-    }
+  }
 
   div.intro {
     margin-left: 32px;
@@ -532,7 +520,6 @@ h6.h6{
 
   main {
     width: 100vmin;
-    
   }
 
   .row {
@@ -540,33 +527,19 @@ h6.h6{
   }
   
 div.stats {
-  padding-top: 10px;
+  padding-top: 0;
 }
-  div.games-played,
-  div.remains,
-  div.accuracy,
-  div.timeout,
-  #reset {
-    display: inline-block;
-    margin: 1px 5px;
-    height: 26px;
-  }
 
-  #togglePauseClock {
-    right: 73px;
-  }
+#togglePauseClock {
+  right: 73px;
+}
 
-  div.timeout {
-    margin: 0px;
-    width: 90px;
-  }
-
-  div.timeout img,
-  div#timer {
-    width: 35px;
-    margin: 0 auto;
-    display: inline-block;
-  }
+div.timeout img,
+div#timer {
+  width: 35px;
+  margin: 0 auto;
+  display: inline-block;
+}
 
   #togglePauseClock,
   #reset {
@@ -587,13 +560,6 @@ div.stats {
     width: 65%;
     max-width: 100%;
     height: 65%;
-  }
-
-  .start-btn {
-    position: absolute;
-    bottom: 81px;
-    width: 39%;
-    right: 88px;
   }
 
   .card {
@@ -676,12 +642,7 @@ div.stats {
       min-height: 100vmin;
       margin: 0 auto;
     }
-    .modal-guts {
-      
-      top: 0;
-      left: 114px;
-      width: 54%;
-  }
+  
 }
 /* --- end iphone 4 -- */
 /* ----------for iphone 6,6S,7,8---------- */
@@ -698,7 +659,6 @@ div.stats {
 
   .cardContainer {
     float: left;
-    /* cursor: pointer; */
   }
 
   .modal {
@@ -710,8 +670,6 @@ div.stats {
 
 /* ------------ for ipad -------------------- */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
-  
-
   .cardContainer {
     float: left; 
   }

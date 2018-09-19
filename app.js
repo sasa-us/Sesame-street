@@ -215,7 +215,9 @@ function disableCardClick() {
 
     togglePauseClock();
     $('#togglePauseClock').hide();
+    $('main').addClass('de-emphasized');
 }
+
 function frozenCardArea() {
     $('.cardArea').off("click");
     $('.cardArea').on('click', timeoutModal);
@@ -363,7 +365,6 @@ function timer() {
         $('#timer').html('0:00');
         timeoutModal();
         $('#clock').attr('src', 'assets/images/stopclock.jpg');
-        // frozenCardArea();
         disableCardClick();
         $('.cardArea').on('click', timeoutModal);
 
@@ -385,6 +386,7 @@ function reset() {
     createRandonCard();
     reset_stats();
     $('.is-flipped').removeClass('is-flipped');
+    $('main').removeClass('de-emphasized');
     $('#togglePauseClock').show();
 } //end reset()
 
@@ -413,7 +415,6 @@ function initialTimer() {
 
     console.log('after reset time flag is ', timerflag);
     $('.cardArea').off("click");
-    // frozenCardArea();
     $('#clock').attr('src', 'assets/images/stopclock.jpg');
     $('#togglePauseClock').text('Start');
 }

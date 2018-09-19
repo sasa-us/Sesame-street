@@ -12,7 +12,7 @@ body {
   background: url("../images/bg-93.111.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  width: 100vw;
+  /* width: 100vw; */
   height: 100vh;
   margin: 0 auto; 
   padding: 0;
@@ -68,7 +68,7 @@ div.timeout,
 }
 
 div.timeout {
-  width: 14vw;
+  width: 16.25vw;
 }
 
 div.timeout img,
@@ -79,7 +79,8 @@ div#timer {
 }
 
 #clock {
-  width: 100%;
+  /* width: 100%; */
+  width: 11vw;
   height: auto;
   max-width: 50px;
   border-radius: 50px;
@@ -420,15 +421,16 @@ h6.h6{
 
 #timeout-modelBody {
   position: fixed;
-  left: 70%;
-  top: 50%;
-  width: 89%;
-  min-width: 87%;
-  min-height: 67%;
+  left: 50%;
+  top: 53%;
+  min-width: 40%;
+  min-height: 53%;
   background-image: url(../images/timeoutModal.jpg);
   background-repeat: no-repeat;
   background-size: contain;
   transform: translate(-50%, -50%);
+  max-width: 100%;
+  height: auto;
 }
 
 /* -------------------- bootstrap  media query ---------------------- */
@@ -525,6 +527,7 @@ h6.h6{
     width: 100vw;
     height: 100vh;
     margin: 0 auto;
+    line-height: 1;
   }
 
   main {
@@ -610,7 +613,7 @@ div.stats {
     margin-bottom: 0px;
   }
 
-  #timeout-modelBody,
+  /* #timeout-modelBody, */
   #modelBody {
     position: fixed;
     left: 49%;
@@ -702,18 +705,6 @@ div.stats {
     left: 47%;
   }
 
-  #timeout-modelBody {
-    position: fixed;
-    left: 49%;
-    top: 53%;
-    min-width: 54%;
-    min-height: 53%;
-    background-image: url(../images/timeoutModal.jpg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    transform: translate(-50%, -50%);
-}
-
 }/*---- end iphone6 ----*/
 
 
@@ -723,18 +714,6 @@ div.stats {
 
   .cardContainer {
     float: left; 
-    /* cursor: pointer; */
   }
-  #timeout-modelBody {
-    position: fixed;
-    left: 50%;
-    top: 53%;
-    min-width: 54%;
-    min-height: 53%;
-    background-image: url(../images/timeoutModal.jpg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    transform: translate(-50%, -50%);
-}
 
 } /*---- end ipad ----*/

@@ -68,17 +68,17 @@ function createRandonCard() {
 } //end createRandonCard
 
 function createNewCard(picture) {
-    var container = $("<div>").addClass('cardContainer');
+    var container = $("<div>").addClass('cardContainer cardContainer-hover mouse-pointer');
     var card = $("<div>").addClass('card');
     container.append(card);
 
-    var image = $("<div>").addClass('card-face image');
+    var image = $("<div>").addClass('card-face image card-face-hover');
     card.append(image);
 
     var imageElement = $("<img>").addClass('pic').attr('src', picture);
     image.append(imageElement);
 
-    var back = $("<div>").addClass('card-face coveringSide');
+    var back = $("<div>").addClass('card-face coveringSide card-face-hover');
     card.append(back);
     var backImage = $("<img>").attr('src', 'assets/images/card-back.png').attr('alt', 'back');
     back.append(backImage);
@@ -145,10 +145,13 @@ function card_clicked() {
             //check if match_counter is equivalent to total_possible_matches=2
             if (match_counter == total_possible_matches) {
                 console.log("win");
+
                 audio.play();
                 winModal();
                 //disable all card when win
-                $('.cardArea').off("click");
+                disableCardClick();
+                //disable start function or hide start 
+
                 console.log('in card_clicked attemps: ', attempts);
                 console.log('card_clicked matches ', matches);
             } else {
@@ -192,16 +195,27 @@ function flipback() {
 function checkwin() {
     if (remains == 0) {
         //unclick all card
-        $('.cardArea').off("click");
+        // $('.cardArea').off("click");
+        disableCardClick();
         //time pause effect 
-        togglePauseClock();
-        $('#togglePauseClock').hide();
+       
+
         //use model to show the result
         popUploseModal();
         $('.cardArea').on('click', timeoutModal);
     }
 }
 
+function disableCardClick() {
+    $('.cardArea').off("click");
+    $('.cardContainer').removeClass("cardContainer-hover");
+    $('.card-face').removeClass('.card-face-hover');
+    $('.cardContainer').removeClass('mouse-pointer');
+    $('.cardContainer').addClass('mouse-not-allowed ');
+
+    togglePauseClock();
+    $('#togglePauseClock').hide();
+}
 function frozenCardArea() {
     $('.cardArea').off("click");
     $('.cardArea').on('click', timeoutModal);
@@ -349,7 +363,10 @@ function timer() {
         $('#timer').html('0:00');
         timeoutModal();
         $('#clock').attr('src', 'assets/images/stopclock.jpg');
-        frozenCardArea();
+        // frozenCardArea();
+        disableCardClick();
+        $('.cardArea').on('click', timeoutModal);
+
         stopTimer();
         return;
     }

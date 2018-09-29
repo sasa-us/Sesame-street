@@ -365,12 +365,13 @@ h6.h6{
 
 #win-modelBody {
   position: fixed;
-  left: 65%;
+  left: 50%;
   top: 50%;
-  width: 89%;
-  min-width: 87%;
+  width: 55%;
   min-height: 67%;
+  height: auto;
   background-image: url(../images/win.1.jpg);
+  background-size: contain;
   background-repeat: no-repeat;
   transform: translate(-50%, -50%);
 }

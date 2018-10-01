@@ -211,11 +211,31 @@ function disableCardClick() {
     $('.cardContainer').removeClass("cardContainer-hover");
     $('.card-face').removeClass('.card-face-hover');
     $('.cardContainer').removeClass('mouse-pointer');
-    $('.cardContainer').addClass('mouse-not-allowed ');
+    $('.cardContainer').addClass('mouse-not-allowed');
 
     togglePauseClock();
     $('#togglePauseClock').hide();
     $('main').addClass('de-emphasized');
+}
+
+function pauseCardClick() {
+    $('.cardArea').off("click");
+    $('.cardContainer').removeClass("cardContainer-hover");
+    $('.card-face').removeClass('.card-face-hover');
+    $('.cardContainer').removeClass('mouse-pointer');
+    $('.cardContainer').addClass('mouse-not-allowed');
+
+    $('main').addClass('de-emphasized');
+}
+function recoverPauseCardClick() {
+    // $('.cardArea').off("click");
+    $('.cardArea').on('click', '.card', card_clicked);
+    $('.cardContainer').addClass("cardContainer-hover");
+    $('.card-face').addClass('.card-face-hover');
+    $('.cardContainer').addClass('mouse-pointer');
+    $('.cardContainer').removeClass('mouse-not-allowed');
+
+    $('main').removeClass('de-emphasized');
 }
 
 function frozenCardArea() {
@@ -325,16 +345,19 @@ function toggleFlag() {
 function changeClock() {
     // debugger;
     console.log('clockflag is ', clockflag)
-    if (clockflag == 1) {
-        $('.cardArea').off("click");
+     // pause
+     if (clockflag == 1) {
+        pauseCardClick();
+        // $('.cardArea').off("click");
         $('#clock').attr('src', 'assets/images/stopclock.jpg');
         $('#togglePauseClock').text('start');
-        // clockflag = 0;
-    } else if (clockflag == 0) {
-        $('.cardArea').on('click', '.card', card_clicked);
+    } 
+    //click again
+    else if (clockflag == 0) {
+        recoverPauseCardClick();
+        // $('.cardArea').on('click', '.card', card_clicked);
         $('#clock').attr('src', 'assets/images/Clock.gif');
         $('#togglePauseClock').text('pause');
-        // clockflag = 1;
     }
 }
 

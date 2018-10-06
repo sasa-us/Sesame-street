@@ -439,7 +439,7 @@ function initialTimer() {
     console.log('after reset time flag is ', timerflag);
     $('.cardArea').off("click");
     $('#clock').attr('src', 'assets/images/stopclock.jpg');
-    $('#togglePauseClock').text('Start');
+    $('#togglePauseClock').text('start');
 }
 
 function display_stats() {
